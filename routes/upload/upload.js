@@ -3,7 +3,6 @@ var router = express.Router();
 let upload = require('../../lib/upload-module');
 
 router.get('/',  function(req, res, next) {
-  
   res.render('upload');
 });
 
