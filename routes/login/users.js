@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-let authentificator = require('../auth');
-const User = require("../models/user");
+//let authentificator = require('../auth');
+// const User = require("../models/user");
 
 // // -> auth
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+// const passport = require('passport');
+// const LocalStrategy = require('passport-local').Strategy;
+
+let login = require('../../lib/login-module');
+let User = login.User;
 
 // Register page
 router.get('/register', function(req, res) {
@@ -61,42 +64,7 @@ router.post('/register', function(req, res) {
 
 });
 
-// // Passport locStr -> auth
-// passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//     User.getUserByUsername(username, function(err, user){
-//       if(err) throw err;
-//       if(!user) {
-//         return done(null, false, {message: 'Unknown User'});
-//       }
-
-//       User.comparePassword(password, user.password, function(err, isMatch){
-//         if(err) throw err;
-//         if(isMatch) {
-//           return done(null, user);
-//         } else {
-//           return done(null, false, {message: 'Invalid password'});
-//         }
-//       });
-//     });
-//   }));
-
-//   // -> auth
-//   passport.serializeUser(function(user, done) {
-//     done(null, user.id);
-//   });
-
-
-//   // -> auth
-//   passport.deserializeUser(function(id, done) {
-//     User.getUserById(id, function(err, user) {
-//       done(err, user);
-//     });
-//   });
-
-// Passport aut - post
-
-router.post('/login', authentificator.test, function(req, res) {
+router.post('/login', login.authTest, function(req, res) {
     res.redirect('/');
   });
 
