@@ -1,6 +1,6 @@
 {
   "name": "simple-login-system",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple login system",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "license": "Engineering",
   "dependencies": {
     "bcryptjs": "*",
+    "bluebird": "*",
     "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "*",
@@ -22,7 +23,6 @@
     "mongoose": "*",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*",
-    "bluebird": "*"
+    "passport-local": "*"
   }
 }
