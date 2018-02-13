@@ -6,18 +6,74 @@ const router = express.Router();
 // // -> auth
 // const passport = require('passport');
 // const LocalStrategy = require('passport-local').Strategy;
-
 let login = require('../../lib/login-module');
+//var auth = require('../../lib/login-module/auth');
+//const User = require('./models/user')
+
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+// Flash req (for messages)
+const flash = require('connect-flash');
+
 let User = login.User;
+
+passport.use(new LocalStrategy({passReqToCallBack: true},
+    function(username, password, done) {
+      User.getUserByUsername(username, function(err, user){
+        if(err) throw err;
+        if(!user) {
+          return done(null, false, {message: 'Unknown User'});
+        }
+  
+        User.comparePassword(password, user.password, function(err, isMatch){
+          if(err) throw err;
+          if(isMatch) {
+            return done(null, user);
+          } else {
+            return done(null, false, {message: 'Invalid password'});
+          }
+        });
+      });
+    }));
+
+exports.auth = function ensureAuth(req, res, next) {
+  if (req.isAuthenticated()){
+    return next();
+  } else {
+      req.flash('error_msg', 'You are not logged in');
+      res.redirect('/users/login')
+  }
+}
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.getUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
+ console.log(passport.authenticate());
+let test = passport.authenticate(//exports
+  'local',
+  console.log("In auth test"),
+  {
+    successRedirect: console.log("Hello hello test"),// /
+    failureRedirect:'/users/login',
+    failureFlash: true
+  }
+);
+
 
 // Register page
 router.get('/register', function(req, res) {
-  res.render('register');
+  res.render('/login/register');
 });
 
 // Login page
 router.get('/login', function(req, res) {
-  res.render('login');
+  res.render('login/login');
 });
 
 // Register User - POST
@@ -64,15 +120,44 @@ router.post('/register', function(req, res) {
 
 });
 
-router.post('/login', login.authTest, function(req, res) {
-    res.redirect('/');
-  });
+// router.post('/login', passport.authenticate(
+//   'local',
+//   console.log("In auth"),
+//   {
+//     successRedirect: res.send("hello"),
+//     failureRedirect:'/login/users/login',
+//     failureFlash: true
+//   }
+// ), function(req, res) {//login.authTest
+//   console.log("In login");
+//     res.redirect('/');
+//   });
 
 router.get('/logout', function(req, res){
   req.logout();
   req.flash('success_msg', 'You are successfully logged out');
   res.redirect('/users/login');
 });
+
+router.post('/login',passport.authenticate(//exports
+  'local',
+  console.log("In auth1"),
+  {
+    successRedirect: '/logout',// /
+    failureRedirect:'/logout',//users/login
+    failureFlash: true
+  }
+), (req, res,next)=>{
+  res.redirect('/');
+  // res.send("Hello");
+  // console.log("In login before auth");
+  // var handler = passport.authenticate('local')(req, res, function() {
+  //   console.log("Another auth");
+  //   res.send("Hello from passport");
+  //   //res.redirect("/")
+  // });
+  // handler(req, res, next);
+})
 
 // Exports
 module.exports = router;

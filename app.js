@@ -6,14 +6,24 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const expbs = require('express-handlebars');
 
-var index = require('./routes/login/index');
-var users = require('./routes/login/users');
-let upload = require('./routes/upload/upload');
 // Flash req (for messages)
 const session = require('express-session');
 const flash = require('connect-flash');
 
 var app = express();
+
+var index = require('./routes/login/index');
+var users = require('./routes/login/users');
+let upload = require('./routes/upload/upload');
+
+// Database req
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+
+// Database connection
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/loginapp');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,14 +32,14 @@ app.set('view engine', 'ejs');
 // View Engine
 app.set('views/login', path.join(__dirname, './views/login'));
 app.engine('handlebars', expbs({ defaultLayout: 'layout',
- layoutsDir: path.join(__dirname, './views/layouts')}));
+ layoutsDir: path.join(__dirname, './views/login/layouts')}));
 app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
