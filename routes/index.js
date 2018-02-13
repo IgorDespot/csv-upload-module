@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+let authentificator = require('../lib/login-module/auth');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+// Home page
+router.get('/', authentificator.auth, function(req, res) {
+  res.render('login/index');
 });
 
+// Exports
 module.exports = router;
