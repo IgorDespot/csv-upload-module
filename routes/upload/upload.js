@@ -8,9 +8,9 @@ router.get('/',  function(req, res, next) {
 
 router.post('/', upload.upload.single('userFile'), (req, res, next) => {
     if (req.file === undefined) {
-        res.send('Error file type must be csv.')
+        res.render('error', {message:message});
     } else {
-        res.send('Ok.')
+        res.send('File uploaded succesfuly');
     }
 });
 
