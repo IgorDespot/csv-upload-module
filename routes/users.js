@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-let authentificator = require('../lib/login-module/auth');
-
-const User = require('../lib/login-module/models/user')
+const loginModule = require('../lib/login-module'); 
 
 // Register page
 router.get('/register', function(req, res) {
@@ -58,7 +56,7 @@ router.post('/register', function(req, res) {
 
 });
 
-router.post('/login', authentificator.test, function(req, res) {
+router.post('/login',loginModule.authTest, function(req, res) {
     res.redirect('/login');
   });
 

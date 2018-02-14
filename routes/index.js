@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-let authentificator = require('../lib/login-module/auth');
+const loginModule = require('../lib/login-module');
 
 // Home page
-router.get('/', authentificator.auth, function(req, res) {
+router.get('/', loginModule.authenticate, function(req, res) {
   res.render('login/index');
 });
 
