@@ -56,9 +56,9 @@ router.post('/register', function(req, res) {
 
 });
 
-router.post('/login',loginModule.authTest, function(req, res) {
-    res.redirect('/login');
-  });
+router.post('/login', loginModule.authTest, function(req, res) {
+  res.redirect('/upload');
+});
 
 router.get('/logout', function(req, res){
   req.logout();

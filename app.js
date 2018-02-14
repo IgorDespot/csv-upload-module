@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const expbs = require('express-handlebars');
 
-//var users = require('./routes/users');
-
 var app = express();
 //--------------
 const login = require('./lib/login-module')(app);
@@ -17,7 +15,7 @@ const routes = require('./routes/login/index');
 const users = require('./routes/login/users');
 const index = require('./routes/login/index');
 const upload = require('./routes/upload/upload');
-//--------------
+
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // //app.engine('ejs', require('ejs').renderFile)
