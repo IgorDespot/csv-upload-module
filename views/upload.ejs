@@ -6,8 +6,9 @@
 </head>
 <body>
 	<form id="uploadForm" enctype="multipart/form-data" method="post">
-		<input type="file" name="userFile" />
+		<input type="file" name="userFile">
 		<input type="submit" value="Upload File" name="submit">
 	</form>
+	<p><%= typeof msg != 'undefined' ? msg : '' %></p>
 </body>
 </html>
