@@ -5,27 +5,26 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const expbs = require('express-handlebars');
-var index = require('./routes/index');
-let upload = require('./routes/upload/upload');
+
 //var users = require('./routes/users');
 
 var app = express();
 //--------------
 const login = require('./lib/login-module')(app);
-console.log(login);
 
 // Routes
- const routes = require('./routes/index');
-//const routes = login.getRoutes();
+const routes = require('./routes/index');
 const users = require('./routes/users');
-//const users = login.getUsers();
+const index = require('./routes/index');
+const upload = require('./routes/upload/upload');
 //--------------
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+// //app.engine('ejs', require('ejs').renderFile)
+// app.set('view engine', 'ejs');
 
 // View Engine
-app.set('views/login', path.join(__dirname, './views/login'));
+app.set('views/login', path.join(__dirname, './views/login'));//
 app.engine('handlebars', expbs({ defaultLayout: 'layout',
  layoutsDir: path.join(__dirname, './views/login/layouts')}));
 app.set('view engine', 'handlebars');
@@ -38,14 +37,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', index);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/upload', upload);
 
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
