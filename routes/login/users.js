@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const loginModule = require('../lib/login-module'); 
+const loginModule = require('../../lib/login-module'); 
 
 // Register page
 router.get('/register', function(req, res) {

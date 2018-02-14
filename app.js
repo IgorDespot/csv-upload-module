@@ -13,9 +13,9 @@ var app = express();
 const login = require('./lib/login-module')(app);
 
 // Routes
-const routes = require('./routes/index');
-const users = require('./routes/users');
-const index = require('./routes/index');
+const routes = require('./routes/login/index');
+const users = require('./routes/login/users');
+const index = require('./routes/login/index');
 const upload = require('./routes/upload/upload');
 //--------------
 // view engine setup
