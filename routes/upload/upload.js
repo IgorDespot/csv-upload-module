@@ -1,8 +1,9 @@
 let express = require('express');
 let router = express.Router();
 let upload = require('../../lib/upload-module');
+const loginModule = require('../../lib/login-module'); 
 
-router.get('/', function (req, res, next) {
+router.get('/', loginModule.authenticate, function (req, res, next) {
     res.render('upload');
 });
 
