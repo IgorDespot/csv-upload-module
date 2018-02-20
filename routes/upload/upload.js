@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', (req, res) => {
-    uploadPostService(req,res);
+    uploadPostService(req, res);
 });
 
 module.exports = router;
