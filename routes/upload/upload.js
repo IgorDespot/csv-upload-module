@@ -3,12 +3,12 @@ let router = express.Router();
 let upload = require('../../lib/upload-module');
 const loginModule = require('../../lib/login-module'); 
 
-router.get('/', loginModule.authenticate, function (req, res, next) {
+router.get('/', function (req, res, next) {
     res.render('upload');
 });
 
 router.post('/', (req, res) => {
-    upload.upload(req, res, (err) => {
+    upload(req, res, (err) => {
         if (err) {
             res.render('upload', {
                 msg: err
