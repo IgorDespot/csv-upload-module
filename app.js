@@ -9,7 +9,8 @@ const expbs = require('express-handlebars');
 
 var app = express();
 //--------------
-const login = require('./lib/login-module')(app);
+const login = require('./lib/login-module');
+login(app);
 
 // Routes
 const routes = require('./routes/login/index');
