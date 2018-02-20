@@ -37,7 +37,7 @@ router.post('/register', function(req, res) {
       errors: errors
     });
   } else {
-      var newUser = new User({
+      var newUser = new loginModule.User({
         firstname: firstname,
         lastname: lastname,
         email: email,
@@ -45,7 +45,7 @@ router.post('/register', function(req, res) {
         password: password
       });
 
-      User.createUser(newUser, function(err, user){
+      loginModule.User.createUser(newUser, function(err, user){
         if(err) throw err;
       });
 
