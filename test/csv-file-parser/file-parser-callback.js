@@ -12,6 +12,22 @@ describe('csv-file-parser.parse', function () {
             function (err, data) {
                 expect(data).toBeTruthy();
                 done();
-            })
+            }
+        );
+    });
+
+    it(`
+        should parse a valid csv file with custom delimiter
+        and blank values
+    `, function (done) {
+        csvFileParser(
+            './test/csv-file-parser/test-2.csv',
+            function (err, data) {
+                expect(data).toEqual(jasmine.any(Array));
+                done();
+            }, {
+                delimiter: ';'
+            }
+        );
     });
 })
