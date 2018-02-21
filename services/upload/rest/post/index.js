@@ -1,4 +1,7 @@
 let upload = require('lib/upload-module');
+let storage = upload.multer.memoryStorage();
+
+upload = upload(storage);
 
 exports = module.exports = function (req, res, next) {
     upload(req, res, (err) => {
