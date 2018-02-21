@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var allRoutesExceptUsersLogin = /^(?!^\/users\/login$)/;
-app.use( allRoutesExceptUsersLogin, login.authenticate);
+app.use(allRoutesExceptUsersLogin, login.authenticate);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/upload', upload);

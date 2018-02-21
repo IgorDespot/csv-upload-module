@@ -1,30 +1,13 @@
 let express = require('express');
 let router = express.Router();
-let upload = require('../../lib/upload-module');
-const loginModule = require('../../lib/login-module'); 
+let {get, post} = require('services/upload/rest');
 
 router.get('/', function (req, res, next) {
-    res.render('upload');
+    get(req, res, next);
 });
 
 router.post('/', (req, res) => {
-    upload(req, res, (err) => {
-        if (err) {
-            res.render('upload', {
-                msg: err
-            });
-        } else {
-            if (req.file == undefined) {
-                res.render('upload', {
-                    msg: 'Error: No file Selected!'
-                });
-            } else {
-                res.render('upload', {
-                    msg: 'File Uploaded'
-                })
-            }
-        }
-    })
+    post(req, res);
 });
 
 module.exports = router;
