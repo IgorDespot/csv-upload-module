@@ -44,4 +44,24 @@ describe('csv-parser.parsePromise', function () {
             done();
         })
     });
+    
+    it('should consider empty values in input', function (done) {
+        parsePromise('first,second\n,2')
+        .then( function success(data) {
+            expect(data).toEqual([{first:'',second:'2'}]);
+            done();
+        }).catch( function () {
+            done.fail("This shouldn't happen");
+        })
+    });
+
+    it('should have configurable delimiters', function (done) {
+        parsePromise('first;second\n1;2', {delimiter: ';'})
+        .then( function success(data) {
+            expect(data).toEqual([{first:'1',second:'2'}]);
+            done();
+        }).catch( function () {
+            done.fail("This shouldn't happen");
+        })
+    });
 });
