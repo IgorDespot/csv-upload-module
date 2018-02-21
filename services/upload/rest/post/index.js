@@ -6,16 +6,14 @@ exports = module.exports = function (req, res, next) {
             res.render('upload', {
                 msg: err
             });
+        } else if (req.file == undefined) {
+            res.render('upload', {
+                msg: 'Error: No file Selected!'
+            });
         } else {
-            if (req.file == undefined) {
-                res.render('upload', {
-                    msg: 'Error: No file Selected!'
-                });
-            } else {
-                res.render('upload', {
-                    msg: 'File Uploaded'
-                });
-            }
+            res.render('upload', {
+                msg: 'File Uploaded'
+            });
         }
     });
 }
