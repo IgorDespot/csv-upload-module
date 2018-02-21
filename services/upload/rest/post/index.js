@@ -8,11 +8,11 @@ exports = module.exports = function (req, res, next) {
             });
         } else if (req.file == undefined) {
             res.render('upload', {
-                msg: 'Error: No file Selected!'
+                msg: 'Error: No file selected!'
             });
         } else {
             res.render('upload', {
-                msg: 'File Uploaded'
+                msg: 'File uploaded.'
             });
         }
     });

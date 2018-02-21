@@ -27,7 +27,7 @@ display: block;
 border-radius: 50%;
 }
 
-.centar{
+.center-div{
   margin: auto;
   width: 70%;
   /*padding-left: 10%;*/
@@ -47,3 +47,10 @@ border-radius: 50%;
     width: 400px;
   }
 }
+
+.msg{
+  text-align: center;
+  font-size: 23px;
+  
+}
+
