@@ -1,6 +1,7 @@
 # Note that mongo container is started before Orion, as Orion needs it
 # as dependency and reserve the order has been found problematic in some
 # low resource hosts
+
 mongo:
   image: mongo:3.4
   command: --nojournal
@@ -12,4 +13,3 @@ orion:
   ports:
     - "1026:1026"
   command: -dbhost mongo
-

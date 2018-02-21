@@ -14,7 +14,7 @@ exports = module.exports = function (req, res, next) {
             } else {
                 res.render('upload', {
                     msg: 'File Uploaded'
-                })
+                });
             }
         }
     });

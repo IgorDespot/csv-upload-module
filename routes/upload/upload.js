@@ -1,14 +1,13 @@
 let express = require('express');
 let router = express.Router();
-let uploadPostService = require('services/upload/post');
-let uploadGetService = require('services/upload/get')
+let {get, post} = require('services/upload/rest');
 
 router.get('/', function (req, res, next) {
-    uploadGetService(req, res, next);
+    get(req, res, next);
 });
 
 router.post('/', (req, res) => {
-    uploadPostService(req, res);
+    post(req, res);
 });
 
 module.exports = router;
