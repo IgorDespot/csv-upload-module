@@ -2,6 +2,7 @@ let upload = require('lib/upload-module');
 upload = upload(upload.multer.memoryStorage());
 
 var csvParser = require('lib/csv-parser');
+var attrParser = require('lib/attribute-checker');
 
 // Check differente errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
@@ -20,6 +21,13 @@ exports = module.exports = function (req, res, next) {
             });
             var data = req.file.buffer.toString();
             csvParser.parsePromise(data, {delimiter: ';'})
+            .then( (data) => {
+                return attrParser.promise(data);
+            }).then(
+                (data) => {
+                    console.log(data);
+                }
+            );
         }
     });
 }
