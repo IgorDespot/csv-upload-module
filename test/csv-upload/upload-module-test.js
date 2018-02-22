@@ -18,5 +18,12 @@ describe('Upload module', function () {
           .expect('status', 200)
           .done(done);
     });
+
+    it('should return a status of 200 and expect file', function (done) {
+        frisby.post('http://localhost:3000/upload',
+        { file: './test/csv-upload/test.csv' },{ headers: { 'Content-Type': 'application/vnd.ms-excel' } })
+          .expect('status', 200)
+          .done(done);
+    });
     
 });
