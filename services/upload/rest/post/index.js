@@ -1,8 +1,7 @@
-let upload = require('lib/upload-module')();
+let upload = require('lib/upload-module');
+upload = upload(upload.multer.memoryStorage());
 
-// uncomment if u need other type of storage
-// let storage = upload.multer.memoryStorage();
-// upload = upload(storage);
+var csvParser = require('lib/csv-parser');
 
 // Check differente errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
@@ -19,6 +18,8 @@ exports = module.exports = function (req, res, next) {
             res.render('upload', {
                 msg: 'File uploaded.'
             });
+            var data = req.file.buffer.toString();
+            csvParser.parsePromise(data, {delimiter: ';'})
         }
     });
 }
