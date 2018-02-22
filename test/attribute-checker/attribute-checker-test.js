@@ -23,4 +23,22 @@ describe('attribute-checker', function () {
             }
         )
     })
+
+    describe('addAttributeRuleSet', function () {
+        var addAttributeRuleSet = attrChecker.addAttributeRuleSet;
+
+        it('should return true if it adds a new ruleset', function (){
+            expect(addAttributeRuleSet('lol',{})).toBe(true);
+        });
+
+        it(`
+            should throw an exception if the ruleset
+            with the same name already exists`,
+            function () {
+                expect(
+                    () => addAttributeRuleSet('lol',{})
+                ).toThrow();
+            }
+        );
+    });
 })
