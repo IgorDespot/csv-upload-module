@@ -2,13 +2,33 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>Upload page</title>
+	<link rel="stylesheet" href="/stylesheets/style.css" >
 </head>
 <body>
-	<form id="uploadForm" enctype="multipart/form-data" method="post">
-		<input type="file" name="userFile" />
-		<input type="submit" value="Upload File" name="submit">
-	</form>
-    <p>{{msg}}</p>
+	<div class="container">
+		<div class="centar">
+			<form id="uploadForm" enctype="multipart/form-data" method="post">
+				<div class="row fields" >
+					<div class="col-sm-12 col-md-10  col-lg-5  col-md-offset-1 " >
+						<div class="form-group">
+							<span class="small">Here you can select which file you wish to upload. Note that only <strong>CSV</strong> files can be uploaded.</span>
+							<label for="userFile" class="btn btn-lg btn-success btn-block">
+								Select file
+								<input type="file" name="userFile" id="userFile" style="display: none;"/>
+								
+							</label>
+						</div>
+						
+						<div class="form-group">
+							<input type="submit" class="btn btn-lg btn-primary btn-block" value="Upload">
+						</div>
+					</div>
+				</div>				
+			</form>
+		</div>
+			<p>{{msg}}</p>
+		
+	</div>
 </body>
 </html>
