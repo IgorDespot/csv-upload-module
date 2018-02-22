@@ -17,13 +17,27 @@ describe('csv-parser.parse', function () {
         parse('"first","second"\n1,2', function (err, out) {
             expect(out).toEqual(jasmine.any(Array));
             done();
-        })
+        });
     });
 
     it('should fail for an invalid csv input', function (done) {
         parse('"first","second"\n12', function (err, out) {
             expect(err).toBeTruthy();
             done();
-        })
+        });
+    });
+
+    it('should consider empty values in input', function (done) {
+        parse('"first","second"\n,2', function (err, out) {
+            expect(out).toEqual(jasmine.any(Array));
+            done();
+        });
+    });
+
+    it('should have configurable delimiters', function (done) {
+        parse('first;second\n1;2', function (err, out) {
+            expect(out).toEqual(jasmine.any(Array));
+            done();
+        }, {delimiter: ';'});
     });
 })
