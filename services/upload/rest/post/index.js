@@ -4,6 +4,10 @@ upload = upload(upload.multer.memoryStorage());
 var csvParser = require('lib/csv-parser');
 var attrParser = require('lib/attribute-checker');
 
+const NGSI = require('ngsijs');
+
+var connection = new NGSI.Connection("http://localhost:1026");
+
 // Check differente errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
     upload(req, res, (err) => {
@@ -25,9 +29,28 @@ exports = module.exports = function (req, res, next) {
                 return attrParser.promise(data);
             }).then(
                 (data) => {
-                    console.log(data);
+                    var promises = [];
+                    data.forEach( (curr, index) => {
+                        promises[index] = Promise.resolve(curr)
+                            .then((obj) => {
+                                return connection.v2.createEntity(
+                                obj, {
+                                    keyValues: true
+                                });
+                            }).then(
+                                (response) => {
+                                    console.log('all went file add resp')
+                                }, (error) => {
+                                    console.log('went bad')
+                                }
+                            );
+                    });
+                    return Promise.all(promises);
                 }
-            );
+            ).then( () => {
+                console.log('all is done')
+            })
+            .catch( (err)=> console.log(err) );
         }
     });
 }
