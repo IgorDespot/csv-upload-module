@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 const expbs = require('express-handlebars');
 
 var app = express();
-//--------------
+// Require login module
 const login = require('./lib/login-module');
 login(app);
 
@@ -17,11 +17,6 @@ const routes = require('./routes/login/index');
 const users = require('./routes/login/users');
 const index = require('./routes/login/index');
 const upload = require('./routes/upload/upload');
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// //app.engine('ejs', require('ejs').renderFile)
-// app.set('view engine', 'ejs');
 
 // View Engine
 app.set('views/login', path.join(__dirname, './views/login'));//

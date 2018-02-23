@@ -8,8 +8,10 @@ exports = module.exports = function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
-  
-    // Validations
+
+    /**
+     * Validations
+     */
     req.checkBody('name', 'Name is required').notEmpty();
     req.checkBody('fiware_service', 'Fiware service  is required').notEmpty();
     req.checkBody('fiware_servicepath', 'Fiware servicepath  is required').notEmpty();
@@ -17,13 +19,18 @@ exports = module.exports = function (req, res) {
     req.checkBody('password', 'Password is required').notEmpty();
     req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
   
-    // Errors
+    /**
+     * Errors
+     */
     var errors = req.validationErrors();
     if (errors) {
       res.render('login/register',{
         errors: errors
       });
     };
+    /**
+     * Check if the user already exists. If not, create new user
+     */
     loginModule.User.getUserByUsername(
         username,
         function (err, user) {
