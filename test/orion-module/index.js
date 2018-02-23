@@ -1,16 +1,9 @@
 const frisby = require('frisby');
-let ormodule = require('lib/orion-module');
+let connection = require('lib/orion-connection');
 
 describe('Orion module', function () {
 
     it('should be a function', function () {
-        expect(typeof ormodule).toBe('function');
+        expect(typeof connection).toBe('function');
     });
-
-    it('should return a status of 400', function (done) {
-        frisby.get('http://localhost:1026/')
-          .expect('status', 400)
-          .done(done);
-    });
-
 });
