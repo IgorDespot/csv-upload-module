@@ -1,11 +1,14 @@
 {
-  "name": "csv-file-parser",
+  "name": "orion-module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Drobniac",
-  "license": "Engineering"
+  "author": "Igor Despot",
+  "license": "ISC",
+  "dependencies": {
+    "ngsijs": "^1.0.3"
+  }
 }

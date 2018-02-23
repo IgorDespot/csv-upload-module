@@ -1,8 +1,11 @@
-let upload = require('lib/upload-module')();
+let upload = require('lib/upload-module');
+upload = upload(upload.multer.memoryStorage());
 
-// uncomment if u need other type of storage
-// let storage = upload.multer.memoryStorage();
-// upload = upload(storage);
+var csvParser = require('lib/csv-parser');
+var attrParser = require('lib/attribute-checker');
+
+const NGSI = require('ngsijs');
+var connection = new NGSI.Connection("http://localhost:1026");
 
 // Check differente errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
@@ -19,6 +22,38 @@ exports = module.exports = function (req, res, next) {
             res.render('upload', {
                 msg: 'File uploaded.'
             });
+            var data = req.file.buffer.toString();
+            csvParser.parsePromise(data, {delimiter: ';'})
+            .then( (data) => {
+                return attrParser.promise(data);
+            })
+            .then( function (data) {
+                return Promise.all(data);
+            })
+            .then(
+                (data) => {
+                    var promises = [];
+                    data.forEach( (curr, index) => {
+                        promises[index] = Promise.resolve(curr)
+                            .then((obj) => {
+                                return connection.v2.createEntity(
+                                obj, {
+                                    keyValues: true
+                                });
+                            }).then(
+                                (response) => {
+                                    console.log('all gucci')
+                                }, (error) => {
+                                    console.log('went bad')
+                                }
+                            );
+                    });
+                    return Promise.all(promises);
+                }
+            ).then( () => {
+                console.log('all is done')
+            })
+            .catch( (err)=> console.log(err) );
         }
     });
 }
