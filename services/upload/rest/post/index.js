@@ -26,24 +26,34 @@ exports = module.exports = function (req, res, next) {
             csvParser.parsePromise(data, {delimiter: ';'})
             .then( (data) => {
                 return attrParser.promise(data);
-            }).then( function (data) {
+            })
+            .then( function (data) {
                 return Promise.all(data);
             })
             .then(
                 (data) => {
-                    return connection.v2.createEntity(
-                        data, {
-                            keyValues: true
-                        }
-                    );
+                    var promises = [];
+                    data.forEach( (curr, index) => {
+                        promises[index] = Promise.resolve(curr)
+                            .then((obj) => {
+                                return connection.v2.createEntity(
+                                obj, {
+                                    keyValues: true
+                                });
+                            }).then(
+                                (response) => {
+                                    console.log('all gucci')
+                                }, (error) => {
+                                    console.log('went bad')
+                                }
+                            );
+                    });
+                    return Promise.all(promises);
                 }
-            ).then(
-                (res) => {
-                    console.log('it lives');
-                }, (err) => {
-                    console.log(err);
-                }
-            );
+            ).then( () => {
+                console.log('all is done')
+            })
+            .catch( (err)=> console.log(err) );
         }
     });
 }
