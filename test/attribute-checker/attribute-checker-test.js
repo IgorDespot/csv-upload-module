@@ -33,12 +33,11 @@ describe('attribute-checker', function () {
 
         it(`
             should throw an exception if the ruleset
-            with the same name already exists`,
-            function () {
+            with the same name already exists
+        `, function () {
                 expect(
-                    () => addAttributeRuleSet('lol',{})
+                    () => addAttributeRuleSet('lol', {})
                 ).toThrow();
-            }
-        );
+        });
     });
 })

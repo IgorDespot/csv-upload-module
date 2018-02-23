@@ -1,15 +1,18 @@
-# Note that mongo container is started before Orion, as Orion needs it
-# as dependency and reserve the order has been found problematic in some
-# low resource hosts
-
-mongo:
-  image: mongo:3.4
-  command: --nojournal
-
-orion:
-  image: fiware/orion
-  links:
-    - mongo
-  ports:
-    - "1026:1026"
-  command: -dbhost mongo
+version: "2"
+services:
+  app:
+    container_name: app
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db2
+      - "./init.js:/usr/local/bin/init.js"
+    ports:
+      - "27017:27017"
