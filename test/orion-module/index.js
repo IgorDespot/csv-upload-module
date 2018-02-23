@@ -35,6 +35,12 @@ describe('Orion module', function () {
             "orion-path": jasmine.any(String)
         }))
     });
+    
+    it('should contain Options', function () {
+        expect(config).toEqual(jasmine.objectContaining({
+            "orion-options": jasmine.any(Object)
+        }))
+    });
 
     
 });
