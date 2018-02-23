@@ -5,7 +5,9 @@ let app = ('../../app');
 describe('User', function () {
     it('should return a status of 200', function (done) {
         frisby.get('http://localhost:3000/users/login')
-        .expect('status', 200)
+        .then(function(res){
+            expect('status', 200);
+        })
         .done(done);
         });
 
