@@ -1,3 +1,5 @@
+import { pseudoRandomBytes } from 'crypto';
+
 let login = require('lib/login-module');
 let frisby = require('frisby');
 let app = ('../../app');
