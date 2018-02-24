@@ -6,7 +6,6 @@ const options = config["orion-options"];
 
 const path = config["orion-path"];
 
-
 describe('Orion module', function () {
 
     it('should be a function', function () {
