@@ -40,5 +40,7 @@ describe('Orion module', function () {
         }))
     });
 
-    
+    it('should recive 1 argument', function () {
+        expect(connection.length).not.toBeLessThan(1);
+    });
 });
