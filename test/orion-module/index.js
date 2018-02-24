@@ -1,4 +1,3 @@
-const frisby = require('frisby');
 let connection = require('lib/orion-connection');
 
 let config = require('../../config.json');
