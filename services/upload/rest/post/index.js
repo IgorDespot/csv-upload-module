@@ -47,6 +47,8 @@ exports = module.exports = function (req, res, next) {
                                 }, (error) => {
                                     if (error.name == 'ConnectionError') {
                                         console.log('Cannot connect to orion atm')
+                                    } else {
+                                        console.log('Data is already in contex broker')
                                     }
                                 }
                             );
