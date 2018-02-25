@@ -25,3 +25,10 @@ For mongodb installation follow the link guide https://docs.mongodb.com/manual/i
 To see images: docker images.
 To see containers: docker containers.
 In case u need to stop images/containers use docker stop [image/container name or ID].
+
+# Orion Contex Broker
+1. OCB used in our project can be found on https://hub.docker.com/r/fiware/orion/
+2. Follow the fastes way in order to setup enviroment (if u dont have one)
+3. In case of input/output error restart docker if error still persists check running containers/images
+using "docker ps -a" and "docker images -a"
+4. In emergancy case if all else fail https://forums.docker.com/t/command-to-remove-all-unused-images/20/2
