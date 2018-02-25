@@ -6,5 +6,6 @@
             "FIWARE-Service": "waste4think",
             "FIWARE-Servicepath": "/deusto/w4t/zamudio/real"
         }
-    }
+    },
+    "file-extentions": [".csv"]
 }
