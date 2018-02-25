@@ -3,6 +3,8 @@
 ##[Unreleased]
 
 ### Added
+- Orion-module
+- Orion-connection module
 - Attribute checker module
 - Csv file parser module
 - Csv parser module
