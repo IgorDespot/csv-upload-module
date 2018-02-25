@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 const expbs = require('express-handlebars');
 
 var app = express();
-//--------------
+// Require login module
 const login = require('./lib/login-module');
 login(app);
 
@@ -18,11 +18,6 @@ const users = require('./routes/login/users');
 const index = require('./routes/login/index');
 const upload = require('./routes/upload/upload');
 const entityList = require('./routes/entity-list');
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// //app.engine('ejs', require('ejs').renderFile)
-// app.set('view engine', 'ejs');
 
 // View Engine
 app.set('views/login', path.join(__dirname, './views/login'));//
@@ -38,8 +33,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var allRoutesExceptUsersLogin = /^(?!^\/users\/login$)/;
-app.use(allRoutesExceptUsersLogin, login.authenticate);
+var allRoutesExceptLoginAndRegister = /^(?!^(\/users\/login$|\/users\/register$))/;
+app.use(allRoutesExceptLoginAndRegister, login.authenticate);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/upload', upload);

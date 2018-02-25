@@ -22,6 +22,7 @@ exports = module.exports = function (req, res, next) {
             res.render('upload', {
                 msg: 'File uploaded.'
             });
+            // Parse data then it send it to orion contex broker
             var data = req.file.buffer.toString();
             csvParser.parsePromise(data, {delimiter: ';'})
             .then( (data) => {
@@ -42,9 +43,9 @@ exports = module.exports = function (req, res, next) {
                                 });
                             }).then(
                                 (response) => {
-                                    console.log('all gucci')
+                                    console.log('Data was send to orion contex broker.')
                                 }, (error) => {
-                                    console.log('went bad')
+                                    console.log('Data is already on orion contex broker.')
                                 }
                             );
                     });
