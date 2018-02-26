@@ -39,17 +39,10 @@ exports = module.exports = function (req, res) {
                     error: "User already exists"
                 });
             } else {
-                var newUser = new loginModule.User({
-                    name: name,
-                    fiware_service: fiware_service,
-                    fiware_servicepath: fiware_servicepath,
-                    username: username,
-                    password: password
-                });
-        
-                loginModule.User.createUser(newUser, function(err, user){
-                    if(err) throw err;
-                });
+
+                var newUser = {name: name, fiware_service: fiware_service, fiware_servicepath: fiware_servicepath, username:username, password: password};
+
+                loginModule.User.createUser(newUser);
         
                 req.flash('success_msg', 'You are registered and now you can login');
                 res.redirect('login');
