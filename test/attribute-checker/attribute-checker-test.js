@@ -44,7 +44,7 @@ describe('attribute-checker', function () {
             and should throw an exception if the ruleset
             with the same name already exists
         `, function (){
-            expect(addAttributeRuleSet('lol',{})).toBe(true);
+            expect(addAttributeRuleSet('lol', {})).toBe(true);
             expect(
                 () => addAttributeRuleSet('lol', {})
             ).toThrow();
