@@ -6,6 +6,8 @@ const options = config["orion-options"];
 
 const path = config["orion-path"];
 
+const addOrUpdateOrion = require('lib/orion-module');
+
 describe('Orion module', function () {
 
     it('should be a function', function () {
@@ -43,4 +45,13 @@ describe('Orion module', function () {
     it('should recive 1 argument', function () {
         expect(connection.length).not.toBeLessThan(1);
     });
+
+    it('should throw error', function () {
+        expect(addOrUpdateOrion).toThrowError();
+    });
+
+    it('should recive 1 argument', function () {
+        expect(addOrUpdateOrion.length).toEqual(1);
+    });
+    
 });
