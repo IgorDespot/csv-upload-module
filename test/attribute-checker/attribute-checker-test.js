@@ -21,7 +21,7 @@ describe('attribute-checker', function () {
             }, {
                 delimiter: ';'
             }
-        )
+        );
     })
 
     it(`
@@ -34,7 +34,7 @@ describe('attribute-checker', function () {
             expect(err).toBeTruthy();
             done();
         });
-    })
+    });
 
     describe('addAttributeRuleSet', function () {
         var addAttributeRuleSet = attrChecker.addAttributeRuleSet;
@@ -50,4 +50,4 @@ describe('attribute-checker', function () {
             ).toThrow();
         });
     });
-})
+});

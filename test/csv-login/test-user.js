@@ -5,7 +5,7 @@
  let mongoose = require('mongoose');
  let app = ('../../app');
 
- describe('User checking', function () {
+ xdescribe('User checking', function () {
     it('should pass the test for auth', function () {
         expect(auth).toEqual(jasmine.any(Function));
     });
