@@ -47,11 +47,11 @@ describe('Orion module', function () {
     });
 
     it('should throw error', function () {
-        expect(addOrUpdateOrion).toThrowError();
+        expect(function () {addOrUpdateOrion();}).toThrowError();
     });
 
     it('should recive 1 argument', function () {
         expect(addOrUpdateOrion.length).toEqual(1);
     });
-    
+
 });
