@@ -2,10 +2,14 @@ const express = require('express');
 const router = express.Router();
 const loginModule = require('../../lib/login-module');
 
-// Home page
+/**
+ * Home page
+ */
 router.get('/', loginModule.authenticate, function(req, res) {
   res.render('login/index');
 });
 
-// Exports
+/**
+ * Exports
+ */
 module.exports = router;

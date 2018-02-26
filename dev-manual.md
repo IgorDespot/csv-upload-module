@@ -14,8 +14,8 @@ If you want to use another port, change it in the configuration file bin/www.js.
 2. Express(module Node)
 3. MongoDB
 
-For mongodb we used hosting on https://mlab.com/ no need to have mongodb on your computer. 
-For mongodb installation follow the link guide https://docs.mongodb.com/manual/installation/ if u need to change db to local.
+For mongodb we used hosting on https://mlab.com/ (mongodb://root:root@ds143388.mlab.com:43388/loginapp) and local mongodb database. 
+For mongodb installation follow the link guide https://docs.mongodb.com/manual/installation/ and /database/Readme.mongodb.txt if you need to use local database. Also, there is a dump of local database you can use to recreate a database. If you want to use local database, change uri in /lib/login-module/index.js.
 
 # Docker
 1. For docker installation https://docs.docker.com/install/#desktop

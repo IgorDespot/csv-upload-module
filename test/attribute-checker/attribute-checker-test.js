@@ -21,8 +21,20 @@ describe('attribute-checker', function () {
             }, {
                 delimiter: ';'
             }
-        )
+        );
     })
+
+    it(`
+        should provide an error when the ruleset
+        doesn't exist
+    `, function (done) {
+        attrChecker([
+            {type:'lolzor'}
+        ], function (err, data) {
+            expect(err).toBeTruthy();
+            done();
+        });
+    });
 
     describe('addAttributeRuleSet', function () {
         var addAttributeRuleSet = attrChecker.addAttributeRuleSet;
@@ -32,10 +44,10 @@ describe('attribute-checker', function () {
             and should throw an exception if the ruleset
             with the same name already exists
         `, function (){
-            expect(addAttributeRuleSet('lol',{})).toBe(true);
+            expect(addAttributeRuleSet('lol', {})).toBe(true);
             expect(
                 () => addAttributeRuleSet('lol', {})
             ).toThrow();
         });
     });
-})
+});

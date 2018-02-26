@@ -4,8 +4,7 @@ upload = upload(upload.multer.memoryStorage());
 var csvParser = require('lib/csv-parser');
 var attrParser = require('lib/attribute-checker');
 
-const NGSI = require('ngsijs');
-var connection = new NGSI.Connection("http://localhost:1026");
+const addOrUpdateOrion = require('lib/orion-module');
 
 // Check differente errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
@@ -37,17 +36,8 @@ exports = module.exports = function (req, res, next) {
                     data.forEach( (curr, index) => {
                         promises[index] = Promise.resolve(curr)
                             .then((obj) => {
-                                return connection.v2.createEntity(
-                                obj, {
-                                    keyValues: true
-                                });
-                            }).then(
-                                (response) => {
-                                    console.log('Data was send to orion contex broker.')
-                                }, (error) => {
-                                    console.log('Data is already on orion contex broker.')
-                                }
-                            );
+                                addOrUpdateOrion(obj);
+                            });
                     });
                     return Promise.all(promises);
                 }
