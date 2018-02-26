@@ -36,7 +36,10 @@ exports = module.exports = function (req, res, next) {
                     data.forEach( (curr, index) => {
                         promises[index] = Promise.resolve(curr)
                             .then((obj) => {
-                                addOrUpdateOrion(obj);
+                                addOrUpdateOrion(obj, (info) => {
+                                    if (info)
+                                        console.log(info);
+                                });
                             });
                     });
                     return Promise.all(promises);
