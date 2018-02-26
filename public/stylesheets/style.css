@@ -5,10 +5,10 @@
 .footer {
 padding: 1px 15px;
 color: #A0A0A0;
-margin-bottom: 15px;
-position: fixed;
-margin-left:10%;
-margin-top: 20px;
+margin-bottom: 0px;
+/* position: fixed; */
+margin-left: 10%;
+/* margin-top: 30px; */
 }
 
 /* @media screen and(max-width: 700px){
@@ -56,4 +56,8 @@ border-radius: 50%;
 
 .labela{
   margin-top: 15px;
+}
+
+.kont{
+   height: 90vh;
 }
