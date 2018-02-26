@@ -3,8 +3,6 @@ let config = require('../../config.json');
 
 const fileExtentions = config['file-extentions'];
 
-console.log(fileExtentions);
-
 describe('Upload module', function () {
 
     it('should be a function', function () {
