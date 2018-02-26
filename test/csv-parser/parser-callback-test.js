@@ -40,4 +40,11 @@ describe('csv-parser.parse', function () {
             done();
         }, {delimiter: ';'});
     });
+
+    it('should fail when given a number', function (done) {
+        parse(69, function (err, out) {
+            expect(err).toBeTruthy();
+            done();
+        });
+    })
 })
