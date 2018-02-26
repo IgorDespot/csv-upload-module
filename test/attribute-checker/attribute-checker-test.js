@@ -24,6 +24,18 @@ describe('attribute-checker', function () {
         )
     })
 
+    it(`
+        should provide an error when the ruleset
+        doesn't exist
+    `, function (done) {
+        attrChecker([
+            {type:'lolzor'}
+        ], function (err, data) {
+            expect(err).toBeTruthy();
+            done();
+        });
+    })
+
     describe('addAttributeRuleSet', function () {
         var addAttributeRuleSet = attrChecker.addAttributeRuleSet;
 
