@@ -7,6 +7,7 @@ var attrParser = require('lib/attribute-checker');
 const addOrUpdateOrion = require('lib/orion-module');
 
 
+
 // Check differente errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
     upload(req, res, (err) => {
@@ -39,20 +40,20 @@ exports = module.exports = function (req, res, next) {
                         data.forEach((curr, index) => {
                             promises[index] = Promise.resolve(curr)
                                 .then((obj) => {
-                                    addOrUpdateOrion(obj, (info) => {
-                                        if (info)
-                                            console.log(info);
+                                    addOrUpdateOrion(obj).then(function (msg) {
+                                        console.log(msg);
+                                    }).catch(function (err) {
+                                        console.log(err);
                                     });
+                                    return Promise.all(promises);
                                 });
                         });
                         return Promise.all(promises);
                     }
                 ).then(() => {
-                    console.log('all is done')
+                    console.log('all is done');
                 })
                 .catch((err) => console.log(err));
         }
     });
-    console.log(infomsg);
 }
-
