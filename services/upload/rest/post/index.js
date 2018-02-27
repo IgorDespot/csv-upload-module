@@ -26,9 +26,6 @@ exports = module.exports = function (req, res, next) {
                 .then((data) => {
                     return attrParser.promise(data);
                 })
-                .then(function (data) {
-                    return Promise.all(data);
-                })
                 .then(
                     (data) => {
                         var promises = [];
