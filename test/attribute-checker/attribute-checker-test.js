@@ -32,7 +32,6 @@ describe('attribute-checker', function () {
             './test/attribute-checker/test-3.csv',
             function (err, data) {
                 attrChecker(data, function (err, data) {
-                    console.log(data);
                     expect(err).toBeFalsy();
                     done();
                 });
