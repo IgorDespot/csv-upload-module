@@ -22,7 +22,25 @@ describe('attribute-checker', function () {
                 delimiter: ';'
             }
         );
-    })
+    });
+
+    it(`
+        shouldn't throw an error on correct csv input
+        with preset attribute ruleset (in this case DepositPoint)
+    `, function (done) {
+        fileParser.parse(
+            './test/attribute-checker/test-3.csv',
+            function (err, data) {
+                attrChecker(data, function (err, data) {
+                    console.log(data);
+                    expect(err).toBeFalsy();
+                    done();
+                });
+            }, {
+                delimiter: ';'
+            }
+        );
+    });
 
     it(`
         should provide an error when the ruleset
