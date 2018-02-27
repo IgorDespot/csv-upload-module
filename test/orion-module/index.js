@@ -50,8 +50,4 @@ describe('Orion module', function () {
         expect(function () {addOrUpdateOrion();}).toThrowError();
     });
 
-    it('should recive 1 argument', function () {
-        expect(addOrUpdateOrion.length).toEqual(1);
-    });
-
 });
