@@ -37,20 +37,19 @@ exports = module.exports = function (req, res, next) {
                         var promises = [];
                         data.forEach((curr, index) => {
                             promises[index] = Promise.resolve(curr)
-                                .then((obj) => {
-                                    addOrUpdateOrion(obj).then(function (msg) {
-                                        console.log(msg)
-                                    }).catch(function (err) {
-                                        console.log(err);
-                                    });
-                                });
+                            .then((obj) => {
+                                return addOrUpdateOrion(obj);
+                            })
                         });
                         return Promise.all(promises);
                     }
                 ).then(() => {
                     console.log('all is done');
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => 
+                console.log('Greska' + err)
+            );
+                
         }
     });
 }
