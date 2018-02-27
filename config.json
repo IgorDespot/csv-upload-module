@@ -7,5 +7,10 @@
             "FIWARE-Servicepath": "/deusto/w4t/zamudio/real"
         }
     },
-    "file-extentions": [".csv"]
+    "file-extentions": [".csv"],
+    "ngsi-converter": {
+        "parse-options": {
+            "delimiter": ";"
+        }
+    }
 }
