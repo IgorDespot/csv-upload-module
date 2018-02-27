@@ -1,10 +1,13 @@
- let auth = require('../../lib/login-module').authenticate;
- let authTest = require('../../lib/login-module').authTest;
- let getUser = require('../../lib/login-module/models/userJson').getUserByUsername;
- let comparePassword = require('../../lib/login-module/models/userJson').comparePassword;
- let app = ('../../app');
+let login = require('../../lib/login-module');
+//let app = ('../../app');
+let auth = login.authenticate;
+let authTest = login.authTest;
+let getUser = login.User.getUserByUsername;
+let comparePassword = login.User.comparePassword;
 
- xdescribe('User checking', function () {
+
+
+ describe('User checking', function () {
     it('should pass the test for auth', function () {
         expect(auth).toEqual(jasmine.any(Function));
     });
