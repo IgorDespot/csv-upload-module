@@ -45,7 +45,6 @@ exports = module.exports = function (req, res, next) {
                                     }).catch(function (err) {
                                         console.log(err);
                                     });
-                                    return Promise.all(promises);
                                 });
                         });
                         return Promise.all(promises);
