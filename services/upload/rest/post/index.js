@@ -39,7 +39,7 @@ exports = module.exports = function (req, res, next) {
                         data.forEach((curr, index) => {
                             promises[index] = Promise.resolve(curr)
                                 .then((obj) => {
-                                    addOrUpdateOrion(obj,req,res, (info) => {
+                                    addOrUpdateOrion(obj, (info) => {
                                         if (info)
                                             console.log(info);
                                     });
