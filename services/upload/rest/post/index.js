@@ -18,9 +18,6 @@ exports = module.exports = function (req, res, next) {
                 msg: 'Error: No file selected!'
             });
         } else {
-            res.render('upload', {
-                msg: 'File uploaded.'
-            });
             // Parse data then it send it to orion contex broker
             var data = req.file.buffer.toString();
             csvParser.parsePromise(data, {
@@ -45,9 +42,14 @@ exports = module.exports = function (req, res, next) {
                     }
                 ).then(() => {
                     console.log('all is done');
+                    res.render('upload', {
+                        msg: 'Succes everything went fine.'
+                    });
                 })
                 .catch((err) => 
-                console.log('Greska' + err)
+                res.render('upload', {
+                    msg: err
+                })
             );
                 
         }
