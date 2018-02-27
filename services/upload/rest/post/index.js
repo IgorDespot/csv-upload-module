@@ -23,28 +23,34 @@ exports = module.exports = function (req, res, next) {
             });
             // Parse data then it send it to orion contex broker
             var data = req.file.buffer.toString();
-            csvParser.parsePromise(data, {delimiter: ';'})
-            .then( (data) => {
-                return attrParser.promise(data);
-            })
-            .then( function (data) {
-                return Promise.all(data);
-            })
-            .then(
-                (data) => {
-                    var promises = [];
-                    data.forEach( (curr, index) => {
-                        promises[index] = Promise.resolve(curr)
-                            .then((obj) => {
-                                addOrUpdateOrion(obj);
-                            });
-                    });
-                    return Promise.all(promises);
-                }
-            ).then( () => {
-                console.log('all is done')
-            })
-            .catch( (err)=> console.log(err) );
+            csvParser.parsePromise(data, {
+                    delimiter: ';'
+                })
+                .then((data) => {
+                    return attrParser.promise(data);
+                })
+                .then(function (data) {
+                    return Promise.all(data);
+                })
+                .then(
+                    (data) => {
+                        var promises = [];
+                        data.forEach((curr, index) => {
+                            promises[index] = Promise.resolve(curr)
+                                .then((obj) => {
+                                    addOrUpdateOrion(obj).then(function (msg) {
+                                        console.log(msg)
+                                    }).catch(function (err) {
+                                        console.log(err);
+                                    });
+                                });
+                        });
+                        return Promise.all(promises);
+                    }
+                ).then(() => {
+                    console.log('all is done');
+                })
+                .catch((err) => console.log(err));
         }
     });
 }

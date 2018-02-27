@@ -19,10 +19,9 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
-    "mongodb": "*",
-    "mongoose": "*",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "uuid": "^3.2.1"
   }
 }
