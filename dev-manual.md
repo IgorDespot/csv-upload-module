@@ -22,6 +22,7 @@ If you want to use another port, change it in the configuration file bin/www.js.
 To see images: docker images.
 To see containers: docker containers.
 In case u need to stop images/containers use docker stop [image/container name or ID].
+To build an image with Dockerfile: docker build -t csvmodule .
 
 # Orion Contex Broker
 1. OCB used in our project can be found on https://hub.docker.com/r/fiware/orion/
