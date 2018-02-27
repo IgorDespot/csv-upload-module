@@ -4,6 +4,8 @@ let auth = login.authenticate;
 let authTest = login.authTest;
 let getUser = login.User.getUserByUsername;
 let comparePassword = login.User.comparePassword;
+let getUserById = login.User.getUserById;
+let createUser = login.User.createUser;
 
 
 
@@ -22,6 +24,10 @@ let comparePassword = login.User.comparePassword;
 
     it('should pass the test for comparePassword', function () {
         expect(comparePassword).toEqual(jasmine.any(Function));
+    });
+
+    it('should pass the test for createUser', function () {
+        expect(createUser).toEqual(jasmine.any(Function));
     });
 
     it('should be defined', function () {
@@ -67,4 +73,44 @@ let comparePassword = login.User.comparePassword;
             }
         );
     });
-})
+});
+
+describe('Json checking', function () {
+    var testJson = {"id":"1","name":"Zamudio","fiware_service":"waste4think","fiware_servicepath":"/deusto/w4t/zamudio/real","username":"zamudio","password":"$2a$10$1la3sKIFtz43a93deUjGCu3TOZMUXE0WITxzNOiFYGll99SWuo9N."};
+    var userJson = {"id":"2","name":"username","fiware_service":"waste4think","fiware_servicepath":"/deusto/w4t/zamudio/real","username":"zamudio","password":"$2a$10$1la3sKIFtz43a93deUjGCu3TOZMUXE0WITxzNOiFYGll99SWuo9N."};
+
+    it('should be equal json objects getUser', function (done) {
+        getUser(
+            'zamudio',
+            function (err, user) {
+                expect(user).toEqual(testJson);
+                done();
+            }
+        );
+    });
+
+    it('should not be equal json objects getUser', function (done) {
+        getUser(
+            'username',
+            function (err, user) {
+                expect(user).not.toEqual(userJson);
+                done();
+            }
+        );
+    });    
+
+    it('should pass the test for getUserById', function () {
+        expect(getUserById).toEqual(jasmine.any(Function));
+    });
+
+    it('should be equal json objects getUserById', function (done) {
+        getUserById(
+            '1',
+            function (err, user) {
+                expect(user).toEqual(testJson);
+                done();
+            }
+        );
+    });
+
+});
