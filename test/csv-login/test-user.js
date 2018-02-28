@@ -3,6 +3,7 @@ const frisby = require('frisby');
 const fs = require('fs');
 var Request = require("request");
 let login = require('../../lib/login-module');
+var superagent = require('superagent').agent();
 let auth = login.authenticate;
 let authTest = login.authTest;
 let getUser = login.User.getUserByUsername;
@@ -128,7 +129,7 @@ describe('Json checking', function () {
 
 });
  
-xdescribe('Route checking', function () {
+describe('Route checking', function () {
     it('should return 200 because it redirects to /users/login', function (done) {
     frisby.get('http://localhost:3000/123')
         .expect('status', 200)
@@ -178,13 +179,21 @@ describe('Integration test: Check credentials', function () {
 
 describe("Server", () => {
     describe(" /users/login", () => {
-        
-        it("Should be ", function() {
-            Request.post( {url:"http://localhost:3000/users/login",followAllRedirects: true,
-            form:{'username': 'zamudio', 'password': '123'}},function(error, response, body){
-                console.log(response.request.redirects);  
-                console.log(response.request.uri.href); 
-            });
+        it("Should redirect to /upload - right credentials", function(done) {
+            superagent.post("http://localhost:3000/users/login")
+            .send({'username': 'zamudio', 'password': '123'})
+            .end(function(err,res){
+                expect(res.redirects[0]).toBe('http://localhost:3000/upload');
+                done();
+            })
+        });
+        it("Should not redirect to /upload - wrong credentials", function(done) {
+            superagent.post("http://localhost:3000/users/login")
+            .send({'username': 'zamudio', 'password': '1234'})
+            .end(function(err,res){
+                expect(res.redirects[0]).toBe('http://localhost:3000/users/login');
+                done();
+            })
         });
     });
 });
