@@ -9,10 +9,12 @@ describe('Orion connection', function () {
     expect(connection).toBeDefined();
   });
 
-  it('should be status 400 because of no service is provided', function (done) {
-  frisby.get(path)
-    .expect('status', 400)
-    .done(done);
+  it('should be defined or orion-module wont work', function () {
+    expect(path).toBeDefined();
   });
 
+  it('should be defined or orion-module wont work', function () {
+    expect(config).toBeDefined();
+  });
+  
 });
