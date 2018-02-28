@@ -1,8 +1,7 @@
 let upload = require('lib/upload-module');
 upload = upload(upload.multer.memoryStorage());
 
-var csvParser = require('lib/csv-parser');
-var attrParser = require('lib/attribute-checker');
+var ngsiConverter = require('lib/ngsi-converter');
 
 const addOrUpdateOrion = require('lib/orion-module');
 
@@ -20,30 +19,25 @@ exports = module.exports = function (req, res, next) {
         } else {
             // Parse data then it send it to orion contex broker
             var data = req.file.buffer.toString();
-            csvParser.parsePromise(data, {
-                    delimiter: ';'
-                })
-                .then((data) => {
-                    return attrParser.promise(data);
-                })
-                .then(
-                    (data) => {
-                        var promises = [];
-                        data.forEach((curr, index) => {
-                            promises[index] = Promise.resolve(curr)
-                            .then((obj) => {
-                                return addOrUpdateOrion(obj);
-                            })
-                        });
-                        return Promise.all(promises);
-                    }
-                ).then(() => {
-                    console.log('all is done');
-                    res.render('upload', {
-                        msg: 'Succes everything went fine.'
+            ngsiConverter(data)
+            .then(
+                (data) => {
+                    var promises = [];
+                    data.forEach((curr, index) => {
+                        promises[index] = Promise.resolve(curr)
+                        .then((obj) => {
+                            return addOrUpdateOrion(obj);
+                        })
                     });
-                })
-                .catch((err) => 
+                    return Promise.all(promises);
+                }
+            ).then(() => {
+                console.log('all is done');
+                res.render('upload', {
+                    msg: 'Succes everything went fine.'
+                });
+            })
+            .catch((err) => 
                 res.render('upload', {
                     msg: err
                 })
