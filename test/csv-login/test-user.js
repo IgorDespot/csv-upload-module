@@ -1,11 +1,8 @@
 var server = require('bin/www');
 const frisby = require('frisby');
 const fs = require('fs');
-var express= require('express');
 var Request = require("request");
-var http = require('http');
 let login = require('../../lib/login-module');
-let app = require('../../app');
 let auth = login.authenticate;
 let authTest = login.authTest;
 let getUser = login.User.getUserByUsername;
