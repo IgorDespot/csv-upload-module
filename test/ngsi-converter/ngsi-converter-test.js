@@ -12,7 +12,7 @@ describe('ngsi-converter', function () {
         valid csv input
     `, function (done) {
         fs.readFile(
-            './test/ngsi-converter/test-2.csv',
+            './test/ngsi-converter/test-3.csv',
             'utf-8',
             function (err, data) {
                 ngsiConverter(data)
