@@ -1,5 +1,13 @@
 let upload = require('lib/upload-module');
 let config = require('../../config.json');
+let path = require('path');
+const FormData = require('form-data');
+const fs = require('fs');
+const frisby = require('frisby');
+console.log("./test.csv");
+
+
+var superagent = require('superagent').agent();
 
 const fileExtentions = config['file-extentions'];
 
@@ -49,5 +57,57 @@ describe('Upload module', function () {
         expect(config).toEqual(jasmine.objectContaining({
             "file-extentions": jasmine.any(Array)
         }));
+    });
+});
+
+describe('Upload module route handle', function () {
+    describe(" /users/login", () => {
+        it("Should redirect to /upload - right credentials", function (done) {
+            superagent.post("http://localhost:3000/users/login")
+                .send({
+                    'username': 'zamudio',
+                    'password': '123'
+                })
+                .end(function (err, res) {
+                    console.log(res);
+                    expect(res.redirects[0]).toBe('http://localhost:3000/upload');
+                    done();
+                })
+        });
+       
+        it("Should  redirect to users/login - no credentials", function (done) {
+            superagent.post("http://localhost:3000/upload")
+            .send({
+                'username': 'zamudio',
+                'password': '1234'
+            })
+            .end(function (err, res) {
+                expect(res.redirects[0]).toBe('http://localhost:3000/users/login');
+                done();
+            })
+        });
+
+        it('should return 200 because it redirects to /users/login', function (done) {
+            frisby.get('http://localhost:3000/upload')
+                .expect('status', 200)
+                .done(done);
+            });
+    });
+});
+
+describe('File-upload', () => {
+    let file, form;
+    
+    it('POST file valid csv for client and API', done => {
+        file = path.resolve(__dirname, './test.csv')
+        form = new FormData()
+        form.append('file', fs.createReadStream(file))
+
+        frisby.post('http://localhost:3000/upload', {
+                headers: form.getHeaders(),
+                body: form
+            })
+            .expect('status', 200)
+            .done(done)
     });
 });
