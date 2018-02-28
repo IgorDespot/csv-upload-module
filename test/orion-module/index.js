@@ -53,8 +53,8 @@ describe('Orion module', function () {
     it('should recive only 1 argument', function () {
         expect(addOrUpdateOrion.length).toEqual(1);
       });
-    
-    it('should be defined or orion-module would not work', function () {
+
+    it('should be defined or orion-module wont work', function () {
       expect(connection).toBeDefined();
     });
 
