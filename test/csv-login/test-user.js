@@ -12,6 +12,9 @@ let getUserById = login.User.getUserById;
 let createUser = login.User.createUser;
 let checkCredentials = login.checkCredentials;
 
+/**
+ * Unit tests
+ */
  describe('User checking', function () {
     it('should pass the test for auth', function () {
         expect(auth).toEqual(jasmine.any(Function));
@@ -70,6 +73,16 @@ let checkCredentials = login.checkCredentials;
     it('should be falsy comparePassword compare not hashed password', function (done) {
         comparePassword(
             '123', '123',
+            function (err, isMatch) {
+                expect(isMatch).not.toBeTruthy();
+                done();
+            }
+        );
+    });
+
+    it('should be falsy comparePassword compare different passwords', function (done) {
+        comparePassword(
+            '123', '1234',
             function (err, isMatch) {
                 expect(isMatch).not.toBeTruthy();
                 done();
@@ -148,13 +161,15 @@ describe('Route checking', function () {
             .expect('status', 200)
             .expect('header','Content-type','text/html; charset=utf-8')
             .then(function (res) { 
-                console.log("In post");
             })
             .done(done);
     });
 });
 
-describe('Integration test: Check credentials', function () {
+/**
+ * Integration tests
+ */
+describe('Integration tests: Check credentials', function () {
     it('it should return true for right credentials', function (done) {
         checkCredentials(
             'zamudio','123',
@@ -177,7 +192,7 @@ describe('Integration test: Check credentials', function () {
     
 });
 
-describe("Server", () => {
+describe("Integration tests: Login page", () => {
     describe(" /users/login", () => {
         it("Should redirect to /upload - right credentials", function(done) {
             superagent.post("http://localhost:3000/users/login")
