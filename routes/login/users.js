@@ -20,7 +20,9 @@ router.get('/login', function(req, res) {
 /**
  * Login User - post method
  */
-router.post('/login', loginModule.authTest);
+router.post('/login', loginModule.authTest, function(req, res){
+  res.redirect('/upload');
+});
 
 /**
  * Register User - post method
