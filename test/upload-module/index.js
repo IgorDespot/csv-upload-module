@@ -4,8 +4,6 @@ let path = require('path');
 const FormData = require('form-data');
 const fs = require('fs');
 const frisby = require('frisby');
-console.log("./test.csv");
-
 
 var superagent = require('superagent').agent();
 
@@ -61,7 +59,7 @@ describe('Upload module', function () {
 });
 
 describe('Upload module route handle', function () {
-    describe(" /users/login", () => {
+    describe(" /upload", () => {
         it("Should redirect to /upload - right credentials", function (done) {
             superagent.post("http://localhost:3000/users/login")
                 .send({
@@ -69,24 +67,11 @@ describe('Upload module route handle', function () {
                     'password': '123'
                 })
                 .end(function (err, res) {
-                    console.log(res);
                     expect(res.redirects[0]).toBe('http://localhost:3000/upload');
                     done();
                 })
         });
        
-        it("Should  redirect to users/login - no credentials", function (done) {
-            superagent.post("http://localhost:3000/upload")
-            .send({
-                'username': 'zamudio',
-                'password': '1234'
-            })
-            .end(function (err, res) {
-                expect(res.redirects[0]).toBe('http://localhost:3000/users/login');
-                done();
-            })
-        });
-
         it('should return 200 because it redirects to /users/login', function (done) {
             frisby.get('http://localhost:3000/upload')
                 .expect('status', 200)
