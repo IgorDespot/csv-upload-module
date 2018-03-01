@@ -1,12 +1,35 @@
 # csv-upload-module
 Module for reading csv file from pilot site users and sending it to Orion context broker.
 
-As a Pilot Site admin,
-I want to upload a CSV file with the information and readings of the sensors of my pilot site
-so that the corresponding attributes of my entities in Orion Context Broker are updated accordingly
+# Installation
+1. Download the repository.
+2. You may need to use npm 5.2.0 since there are issues with npm 5.3.0 on Windows 10.
+3. Install npm modules: npm install.
+4. Install nested npm modules: npx recursive-install. (this will instll modules from package.json files from upload-module, login-module, etc..)
+5. Start up server: npm start (we used nodemon).
 
-Acceptance Criteria:
-- I can connect to the application via browser
-- I can upload my local CSV file to the application via browser
-- The attributes of my entities in Orion Context Broker are updated using the values of the CSV file
-- Only I can update the attributes of my entities in Orion Context Broker
+If you want to use another port, change it in the configuration file bin/www.js.Change the value of the key field port.
+
+# Software to use
+1. Nodejs
+2. Express(module Node)
+3. json
+
+# Docker
+1. For docker installation https://docs.docker.com/install/#desktop
+2. Download docker image using "docker pull marijaborisov/csvmodule".
+3. Run the downloaded docker image: "docker run -p 3000:3000 -d marijaborisov/csvmodule".
+4. To make image from Dockerfile: docker build -t csvmodule .
+5. To run container from image, for example: docker run -p 3000:3000 -d csvmodule
+
+To see images: docker images.
+To see containers: docker containers.
+In case u need to stop images/containers use docker stop [image/container name or ID].
+To build an image with Dockerfile: docker build -t csvmodule .
+
+# Orion Contex Broker
+1. OCB used in our project can be found on https://hub.docker.com/r/fiware/orion/
+2. Follow the fastes way in order to setup enviroment (if u dont have one)
+3. In case of input/output error restart docker if error still persists check running containers/images
+using "docker ps -a" and "docker images -a"
+4. In emergancy case if all else fail https://forums.docker.com/t/command-to-remove-all-unused-images/20/2
