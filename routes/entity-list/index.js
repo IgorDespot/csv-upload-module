@@ -1,16 +1,14 @@
 let express = require('express');
 let router = express.Router();
-
-const NGSI = require('ngsijs');
-
-var connection = new NGSI.Connection("http://localhost:1026");
+const all = require('../../lib/orion-module').listAll;
 
 router.get('/', function (req, res, next) {
-    connection.v2.listEntities({
-        limit: 200
-    })
-    .then((response) => {
-        res.send(response);
+    all().then(function(entities) {
+      console.log(entities);
+      res.send(entities)
+    }).catch((error) => {
+      console.log(error);
+      res.send(error)
     });
 });
 

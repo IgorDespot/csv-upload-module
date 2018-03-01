@@ -32,7 +32,6 @@ exports = module.exports = function (req, res, next) {
                     return Promise.all(promises);
                 }
             ).then(() => {
-                console.log('all is done');
                 res.render('upload', {
                     msg: 'Succes everything went fine.'
                 });
@@ -41,8 +40,7 @@ exports = module.exports = function (req, res, next) {
                 res.render('upload', {
                     msg: err
                 })
-            );
-                
+            );               
         }
     });
 }
