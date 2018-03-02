@@ -1,4 +1,5 @@
 require('app-module-path').addPath( __dirname );
+var helmet = require('helmet');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -9,6 +10,9 @@ const expbs = require('express-handlebars');
 const fs = require('fs');
 
 var app = express();
+
+app.use(helmet());
+
 // Require login module
 const login = require('./lib/login-module');
 login(app);
