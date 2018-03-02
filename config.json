@@ -1,12 +1,5 @@
 {
-    "orion-path": "http://localhost:1026",
-    "orion-options": {
-        "request_headers": {
-            "Content-Type": "application/json",
-            "FIWARE-Service": "waste4think",
-            "FIWARE-Servicepath": "/deusto/w4t/zamudio/real"
-        }
-    },
+    "orion-path": "http://130.206.117.164",
     "file-extentions": [".csv"],
     "ngsi-converter": {
         "parse-options": {
