@@ -11,7 +11,7 @@ const fs = require('fs');
 
 var app = express();
 
-app.use(helmet({
+app.use(helmet.hsts({
   maxAge: 5184000,
   includeSubDomains: true,
   preload: true,
