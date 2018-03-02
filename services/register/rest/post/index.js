@@ -1,7 +1,9 @@
 var loginModule = require('lib/login-module');
 
 exports = module.exports = function (req, res) {
-
+    /**
+     * Variables
+     */
     var name = req.body.name;
     var fiware_service  = req.body.fiware_service ;
     var fiware_servicepath = req.body.fiware_servicepath;
