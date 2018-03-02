@@ -11,7 +11,14 @@ const fs = require('fs');
 
 var app = express();
 
-app.use(helmet());
+app.use(helmet({
+  maxAge: 5184000,
+  includeSubDomains: true,
+  preload: true,
+  setIf: function (req, res) {
+    return req.secure || (req.headers['x-forwarded-proto'] === 'https')
+  }
+}));
 
 // Require login module
 const login = require('./lib/login-module');
