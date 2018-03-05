@@ -1,8 +1,7 @@
-var server = require('bin/www');
 const frisby = require('frisby');
 const fs = require('fs');
 var Request = require("request");
-let login = require('../../lib/login-module');
+let login = require('lib/login-module');
 var superagent = require('superagent').agent();
 let auth = login.authenticate;
 let authTest = login.authTest;
@@ -12,9 +11,6 @@ let getUserById = login.User.getUserById;
 let createUser = login.User.createUser;
 let checkCredentials = login.checkCredentials;
 
-/**
- * Unit tests
- */
  describe('User checking', function () {
     it('should pass the test for auth', function () {
         expect(auth).toEqual(jasmine.any(Function));
@@ -166,9 +162,6 @@ describe('Route checking', function () {
     });
 });
 
-/**
- * Integration tests
- */
 describe('Integration tests: Check credentials', function () {
     it('it should return true for right credentials', function (done) {
         checkCredentials(
