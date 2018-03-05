@@ -1,11 +1,11 @@
-let upload = require('lib/upload-module');
-upload = upload(upload.multer.memoryStorage());
+let uploadModule = require('lib/upload-module');
+let upload = uploadModule(uploadModule.multer.memoryStorage());
 
 var ngsiConverter = require('lib/ngsi-converter');
 
 const addOrUpdateOrion = require('lib/orion-module');
 
-// Check differente errors and handle displaying them to user
+// Check different errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
     upload(req, res, (err) => {
         if (err) {
@@ -19,7 +19,8 @@ exports = module.exports = function (req, res, next) {
         } else {
             // Parse data then it send it to orion contex broker
             var data = req.file.buffer.toString();
-            ngsiConverter(data)
+            var extension = uploadModule.getFileExtension(req.file);
+            ngsiConverter(data, extension)
             .then(
                 (data) => {
                     var promises = [];
