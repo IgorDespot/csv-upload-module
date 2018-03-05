@@ -3,7 +3,7 @@
     "file-extentions": [".csv"],
     "ngsi-converter": {
         "parse-options": {
-            "csv": {
+            ".csv": {
                 "delimiter": ";"
             }
         }
