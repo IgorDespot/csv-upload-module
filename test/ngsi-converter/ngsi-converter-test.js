@@ -28,4 +28,26 @@ describe('ngsi-converter', function () {
             }
         );
     });
+
+    it(`
+        fails if extension isn't supported
+    `, function (done) {
+        ngsiConverter('gibberish', '.unsupported')
+        .then((x) => {
+            done.fail("This shouldn't succeed")
+        })
+        .catch((x) => {
+            done("This should be caught");
+        });
+    });
+
+    it("fails when extension is not provided", function (done) {
+        ngsiConverter('some data')
+        .then((x) => {
+            done.fail("This shouldn't succeed")
+        })
+        .catch((x) => {
+            done("This should be caught");
+        });
+    });
 });
