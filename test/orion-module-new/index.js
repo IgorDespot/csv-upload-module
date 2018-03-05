@@ -2,7 +2,7 @@ const config = require('config');
 
 const orionPath = config["orion-path"];
 
-const entities = require('lib/orion-module-new');
+const entities = require('lib/orion-module-new').listEntities;
 
 console.log(orionPath);
 
@@ -35,6 +35,7 @@ describe('function checks', () => {
     })
     .catch( () => {
       done.fail('Should not come here');
-    })
-  })
+    });
+  });
+
 });
