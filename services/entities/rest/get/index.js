@@ -3,8 +3,8 @@ const getAll = require('lib/orion-module-new');
 
 exports = module.exports = function(req, res, next) {
   getAll().then(function(entities) {
-    res.send(entities)
+    res.render('entities', {data: entities});
   }).catch((error) => {
-    res.send(error)
+    res.render('entities', {msg: error});
   });
 }
