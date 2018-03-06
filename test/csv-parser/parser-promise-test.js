@@ -24,7 +24,7 @@ describe('csv-parser.parsePromise', function () {
 
     it(`
         should pass JSON converted valid string csv
-        to the success function
+        to the success function as an Array
     `, function (done) {
         parsePromise('"first","second"\n1,2')
         .then( function success(data) {
