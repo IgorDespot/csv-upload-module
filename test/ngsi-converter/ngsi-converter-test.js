@@ -50,6 +50,27 @@ describe('ngsi-converter', function () {
     });
 
     it(`
+        returns an ngsi compatable JS object
+        from valid json input
+    `, function (done) {
+        fs.readFile(
+            './test/ngsi-converter/test.json',
+            'utf-8',
+            function (err, data) {
+                ngsiConverter(data, '.json')
+                .then( function (data) {
+                    expect(data).toEqual(jasmine.any(Array));
+                    console.log(data);
+                    done();
+                })
+                .catch(function (data) {
+                    done.fail("This shouldn't happen");
+                });
+            }
+        );
+    });
+
+    it(`
         fails if extension isn't supported
     `, function (done) {
         ngsiConverter('gibberish', '.unsupported')
