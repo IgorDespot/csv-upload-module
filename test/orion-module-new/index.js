@@ -4,8 +4,6 @@ const orionPath = config["orion-path"];
 
 const entities = require('lib/orion-module-new').listEntities;
 
-console.log(orionPath);
-
 describe('toBeDefined checks', () => {
 
   it('config should be defined or error will throw', () => {
