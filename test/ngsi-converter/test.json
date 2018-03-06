@@ -1,0 +1,10 @@
+[
+    {
+        "id": "DepositPoint:0",
+        "type": "DepositPoint"
+    },
+    {
+        "id": "DepositPoint:1",
+        "type": "DepositPoint"
+    }
+]
