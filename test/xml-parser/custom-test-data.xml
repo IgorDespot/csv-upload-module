@@ -1,0 +1,14 @@
+<entities>
+    <entity>
+        <id>DepositPoint:0</id>
+        <type>DepositPoint</type>
+    </entity>
+    <entity>
+        <id>DepositPoint:1</id>
+        <type>DepositPoint</type>
+    </entity>
+    <entity>
+        <id>DepositPoint:2</id>
+        <type>DepositPoint</type>
+    </entity>
+</entities>
