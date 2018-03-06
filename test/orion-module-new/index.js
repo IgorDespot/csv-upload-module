@@ -38,8 +38,9 @@ describe('function checks', () => {
   });
 
   it(`
-    should throw error
+    should throw error if passed entity is undefined
   `, function () {
-    expect(function(){create()}).toThrow(new Error('Entity must be defined'));
+    expect(function(){create()}).toThrowError('Entity must be defined');
   });  
+  
 });
