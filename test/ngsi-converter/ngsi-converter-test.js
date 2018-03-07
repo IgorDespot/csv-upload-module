@@ -58,7 +58,7 @@ describe('ngsi-converter', function () {
             'utf-8',
             function (err, data) {
                 ngsiConverter(data, '.json')
-                .then( function (data) {
+                .then(function (data) {
                     expect(data).toEqual(jasmine.any(Array));
                     done();
                 })
