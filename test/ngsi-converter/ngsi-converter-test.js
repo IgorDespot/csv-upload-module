@@ -60,7 +60,6 @@ describe('ngsi-converter', function () {
                 ngsiConverter(data, '.json')
                 .then( function (data) {
                     expect(data).toEqual(jasmine.any(Array));
-                    console.log(data);
                     done();
                 })
                 .catch(function (data) {
