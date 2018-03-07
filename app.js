@@ -52,8 +52,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var allRoutesExceptLoginAndRegister = /^(?!^(\/users\/login$|\/users\/register$))/;
-app.use(allRoutesExceptLoginAndRegister, login.authenticate);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/upload', upload);
