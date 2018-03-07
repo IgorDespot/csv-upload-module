@@ -5,6 +5,8 @@ var ngsiConverter = require('lib/ngsi-converter');
 
 const addOrUpdateOrion = require('lib/orion-module');
 
+const create = require('lib/orion-module-new').createEntity;
+
 // Check different errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
     upload(req, res, (err) => {
@@ -27,7 +29,7 @@ exports = module.exports = function (req, res, next) {
                     data.forEach((curr, index) => {
                         promises[index] = Promise.resolve(curr)
                         .then((obj) => {
-                            return addOrUpdateOrion(obj);
+                            return create(obj);
                         })
                     });
                     return Promise.all(promises);
