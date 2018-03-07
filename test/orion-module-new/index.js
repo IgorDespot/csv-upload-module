@@ -3,6 +3,7 @@ const config = require('config');
 const orionPath = config["orion-path"];
 
 const entities = require('lib/orion-module-new').listEntities;
+const create = require('lib/orion-module-new').createEntity;
 
 describe('toBeDefined checks', () => {
 
@@ -36,4 +37,10 @@ describe('function checks', () => {
     });
   });
 
+  it(`
+    should throw error if passed entity is undefined
+  `, function () {
+    expect(function(){create()}).toThrowError('Entity must be defined');
+  });  
+  
 });
