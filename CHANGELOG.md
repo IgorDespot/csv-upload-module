@@ -8,6 +8,9 @@
 - Attribute checker module
 - Csv file parser module
 - Csv parser module
+- XML parser module
+- JSON parser module
+- NGSI converter
 - Login module
 - Upload module
 - Common stylesheet
