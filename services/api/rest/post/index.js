@@ -22,20 +22,30 @@ exports = module.exports = function (req, res, next) {
             .then(
                 (data) => {
                     var promises = [];
+                    var responses = [];
                     data.forEach((curr, index) => {
                         promises[index] = Promise.resolve(curr)
                         .then((obj) => {
-                            return create(obj);
-                        })
+                            responses[index] = entityFailWrapper(create(obj));
+                            return responses[index];
+                        });
                     });
                     return Promise.all(promises);
                 }
-            ).then(() => {
-                res.json('All went fine.')
+            )
+            .then((msg) => {
+                res.json(msg);
             })
             .catch((err) => 
                 res.json(err)
             );               
         }
+    });
+}
+
+function entityFailWrapper(promise) {
+    return promise
+    .catch((err) => {
+        return Promise.resolve(err);
     });
 }
