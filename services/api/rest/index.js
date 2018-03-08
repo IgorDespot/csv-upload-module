@@ -1,6 +1,7 @@
 let get = require('./get');
-var post = require('./post');
+let post = require('./post');
+let patch = require('./patch')
 
 module.exports = {
-  get,post
+  get,post,patch
 }

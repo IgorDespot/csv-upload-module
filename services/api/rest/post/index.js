@@ -9,6 +9,10 @@ const create = require('lib/orion-module-new').createEntity;
 
 // Check different errors and handle displaying them to user
 exports = module.exports = function (req, res, next) {
+
+    let service = req.headers['fiware-service'];
+    let service_path = req.headers['fiware-servicepath'];
+
     upload(req, res, (err) => {
         if (err) {
             res.json(err)
@@ -26,7 +30,7 @@ exports = module.exports = function (req, res, next) {
                     data.forEach((curr, index) => {
                         promises[index] = Promise.resolve(curr)
                         .then((obj) => {
-                            responses[index] = entityFailWrapper(create(obj));
+                            responses[index] = entityFailWrapper(create(service,service_path,obj));
                             return responses[index];
                         });
                     });
