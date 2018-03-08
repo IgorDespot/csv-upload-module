@@ -30,6 +30,7 @@ const users = require('./routes/login/users');
 const index = require('./routes/login/index');
 const upload = require('./routes/upload/upload');
 const entityList = require('./routes/entity-list');
+const api = require('./routes/api');
 
 // View Engine
 app.set('views/login', path.join(__dirname, './views/login'));//
@@ -56,6 +57,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/upload', upload);
 app.use('/entities', entityList);
+app.use('/api', api);
 
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
