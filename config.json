@@ -1,5 +1,5 @@
 {
-    "orion-path": "http://130.206.117.164",
+    "orion-path": "http://130.206.117.164/v2/entities",
     "file-extentions": [".csv"],
     "ngsi-converter": {
         "parse-options": {
