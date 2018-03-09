@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
     post(req, res);
 });
 
-router.patch('/update', (req, res) => {
+router.post('/update', (req, res) => {
     patch(req, res);
 });
 
