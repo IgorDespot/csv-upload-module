@@ -30,7 +30,7 @@ exports = module.exports = function (req, res, next) {
                     data.forEach((curr, index) => {
                         promises[index] = Promise.resolve(curr)
                         .then((obj) => {
-                            responses[index] = entityFailWrapper(updateEntities(service,service_path,obj));
+                            responses[index] = entityFailWrapper(updateEntities(obj));
                             return responses[index];
                         });
                     });

@@ -12,7 +12,7 @@ exports = module.exports = function (req, res, next) {
 
     let service = req.headers['fiware-service'];
     let service_path = req.headers['fiware-servicepath'];
-
+    
     upload(req, res, (err) => {
         if (err) {
             res.json(err)
@@ -30,7 +30,7 @@ exports = module.exports = function (req, res, next) {
                     data.forEach((curr, index) => {
                         promises[index] = Promise.resolve(curr)
                         .then((obj) => {
-                            responses[index] = entityFailWrapper(create(service,service_path,obj));
+                            responses[index] = entityFailWrapper(create(obj));
                             return responses[index];
                         });
                     });
