@@ -26,8 +26,8 @@ router.post('/entities', function (req, res, next) {
     post.createEntity(req,res, next);
 });
 
-router.post('/entities/update', (req, res) => {
-    patch(req, res);
+router.post('/entities/update', function (req, res, next) {
+    patch.updateEntity(req, res, next);
 });
 
 module.exports = router;
