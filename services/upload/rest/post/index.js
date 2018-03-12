@@ -3,8 +3,6 @@ let upload = uploadModule(uploadModule.multer.memoryStorage());
 
 var ngsiConverter = require('lib/ngsi-converter');
 
-const addOrUpdateOrion = require('lib/orion-module');
-
 const create = require('lib/orion-module-new').createEntity;
 
 // Check different errors and handle displaying them to user
