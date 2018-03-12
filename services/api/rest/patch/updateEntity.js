@@ -9,8 +9,6 @@ exports = module.exports = function (req, res, next) {
 
     let service = req.headers['fiware-service'];
     let service_path = req.headers['fiware-servicepath'];
-    
-    console.log('Pozdrav')
 
     upload(req, res, (err) => {
         if (err) {
