@@ -9,7 +9,7 @@ var superagent = require('superagent').agent();
 
 const fileExtentions = config['file-extentions'];
 
-describe('Upload module', function () {
+xdescribe('Upload module', function () {
 
     it('should be a function', function () {
         expect(upload).toEqual(jasmine.any(Function));
@@ -58,7 +58,7 @@ describe('Upload module', function () {
     });
 });
 
-describe('Upload module route handle', function () {
+xdescribe('Upload module route handle', function () {
     describe(" /upload", () => {
         it("Should redirect to /upload - right credentials", function (done) {
             superagent.post("http://localhost:3000/users/login")
@@ -80,7 +80,7 @@ describe('Upload module route handle', function () {
     });
 });
 
-describe('File-upload', () => {
+xdescribe('File-upload', () => {
     let file, form;
     
     it('POST file valid csv for client and API', done => {

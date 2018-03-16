@@ -11,7 +11,7 @@ let getUserById = login.User.getUserById;
 let createUser = login.User.createUser;
 let checkCredentials = login.checkCredentials;
 
- describe('User checking', function () {
+ xdescribe('User checking', function () {
     it('should pass the test for auth', function () {
         expect(auth).toEqual(jasmine.any(Function));
     });
@@ -87,7 +87,7 @@ let checkCredentials = login.checkCredentials;
     });
 });
 
-describe('Json checking', function () {
+xdescribe('Json checking', function () {
     var testJson = {"id":"1","name":"Zamudio","fiware_service":"waste4think","fiware_servicepath":"/deusto/w4t/zamudio/real","username":"zamudio","password":"$2a$10$1la3sKIFtz43a93deUjGCu3TOZMUXE0WITxzNOiFYGll99SWuo9N."};
     var userJson = {"id":"2","name":"username","fiware_service":"waste4think","fiware_servicepath":"/deusto/w4t/zamudio/real","username":"zamudio","password":"$2a$10$1la3sKIFtz43a93deUjGCu3TOZMUXE0WITxzNOiFYGll99SWuo9N."};
     var usersDb = JSON.parse(fs.readFileSync('db/users.json', 'utf8'));
@@ -138,7 +138,7 @@ describe('Json checking', function () {
 
 });
  
-describe('Route checking', function () {
+xdescribe('Route checking', function () {
     it('should return 200 because it redirects to /users/login', function (done) {
     frisby.get('http://localhost:3000/123')
         .expect('status', 200)
@@ -162,7 +162,7 @@ describe('Route checking', function () {
     });
 });
 
-describe('Integration tests: Check credentials', function () {
+xdescribe('Integration tests: Check credentials', function () {
     it('it should return true for right credentials', function (done) {
         checkCredentials(
             'zamudio','123',
@@ -185,7 +185,7 @@ describe('Integration tests: Check credentials', function () {
     
 });
 
-describe("Integration tests: Login page", () => {
+xdescribe("Integration tests: Login page", () => {
     describe(" /users/login", () => {
         it("Should redirect to /upload - right credentials", function(done) {
             superagent.post("http://localhost:3000/users/login")

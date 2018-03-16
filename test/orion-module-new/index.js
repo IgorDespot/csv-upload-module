@@ -5,7 +5,7 @@ const orionPath = config["orion-path"];
 const entities = require('lib/orion-module-new').listEntities;
 const create = require('lib/orion-module-new').createEntity;
 
-describe('toBeDefined checks', () => {
+xdescribe('toBeDefined checks', () => {
 
   it('config should be defined or error will throw', () => {
     expect(config).toBeDefined();
@@ -17,7 +17,7 @@ describe('toBeDefined checks', () => {
 
 });
 
-describe('function checks', () => {
+xdescribe('function checks', () => {
 
   it('should be function',  () => {
       expect(entities).toEqual(jasmine.any(Function));
