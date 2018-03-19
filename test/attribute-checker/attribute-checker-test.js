@@ -48,9 +48,27 @@ describe('attribute-checker', function () {
         attrChecker([
             {type:'lolzor'}
         ], function (err, data) {
-            expect(err).toBeTruthy();
+            expect(err).toMatch("not defined");
             done();
         });
+    });
+
+    it(`
+        should pass an array of errors when strictEntityCheck is enabled
+        if some entities have invalid(null or undefined) property values
+    `, function (done) {
+        fileParser.parse(
+            './test/attribute-checker/err-test.csv',
+            function (err, data) {
+                attrChecker(data, function (err, data) {
+                    expect(err.length).toBe(1);
+                    expect(data).toBeTruthy();
+                    done();
+                }, {strictEntityCheck: true});
+            }, {
+                delimiter: ';'
+            }
+        );
     });
 
     describe('addAttributeRuleSet', function () {
