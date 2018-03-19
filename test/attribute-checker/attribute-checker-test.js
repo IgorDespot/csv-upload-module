@@ -55,13 +55,14 @@ describe('attribute-checker', function () {
 
     it(`
         should pass an array of errors when strictEntityCheck is enabled
-        if some entities have invalid(null or undefined) property values
+        if some entities have invalid(null or undefined) property values,
+        but also provide entities with valid properties
     `, function (done) {
         fileParser.parse(
             './test/attribute-checker/err-test.csv',
             function (err, data) {
                 attrChecker(data, function (err, data) {
-                    expect(err.length).toBe(1);
+                    expect(err.length).toBeGreaterThan(0);
                     expect(data).toBeTruthy();
                     done();
                 }, {strictEntityCheck: true});

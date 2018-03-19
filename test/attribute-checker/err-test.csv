@@ -1,6 +1,6 @@
 id;type;serialNumber;refSortingType;description;refCollectionPointType;storedWastOrigin;address;fillingLevel;cargoWeight;temperature;methaneConcentration;regulation;responsible;owner;dateServiceStarted;dateLastEmptying;nextActuationDeadline;actuationHours;openingHours;dateLastCleaning;nextCleaningDeadline;refCollectionPointlsle;status;color;image;annotations;areaServed;dateModified;refDevice;coordxUTM;coordyUTM;POINT_X;POINT_Y
 DepositPoint:0;DepositPoint;;;;;;;0;0;0;;;;Txorierri;;;;;;;;;;;;;;;;511031;4792512;;43,28534394
-DepositPoint:1;DepositPoint;;;;;;;0;0;0;;;;Txorierri;;;;;;;;;;;;;;;;511021;4792405;-2,864163525;43,28438635
+DepositPoint:1;DepositPoint;;;;;;;0;0;0;;;;Txorierri;;;;;;;;;;;;;;;;511021;4792405;;43,28438635
 DepositPoint:2;DepositPoint;;;;;;;0;0;0;;;;Txorierri;;;;;;;;;;;;;;;;511318;4792160;-2,860498306;43,28217617
 DepositPoint:3;DepositPoint;;;;;;;0;0;0;;;;Txorierri;;;;;;;;;;;;;;;;511178;4792009;-2,862225803;43,28081735
 DepositPoint:4;DepositPoint;;;;;;;0;0;0;;;;Txorierri;;;;;;;;;;;;;;;;511029;4792203;-2,864061701;43,28256301
