@@ -1,6 +1,17 @@
 var ngsiConverter = require('lib/ngsi-converter');
 var fs = require('fs');
 
+var options = {
+    "parse-options": {
+        ".csv": {
+            "delimiter": ";"
+        }
+    },
+    "attribute-checker-options": {
+        "strictEntityCheck": false
+    }
+}
+
 describe('ngsi-converter', function () {
 
     it(`
@@ -17,7 +28,7 @@ describe('ngsi-converter', function () {
             './test/ngsi-converter/test-3.csv',
             'utf-8',
             function (err, data) {
-                ngsiConverter(data, '.csv')
+                ngsiConverter(data, '.csv', options)
                 .then( function (data) {
                     expect(data).toEqual(jasmine.any(Array));
                     done();
@@ -37,7 +48,7 @@ describe('ngsi-converter', function () {
             './test/ngsi-converter/test.xml',
             'utf-8',
             function (err, data) {
-                ngsiConverter(data, '.xml')
+                ngsiConverter(data, '.xml', options)
                 .then( function (data) {
                     expect(data).toEqual(jasmine.any(Array));
                     done();
@@ -57,12 +68,13 @@ describe('ngsi-converter', function () {
             './test/ngsi-converter/test.json',
             'utf-8',
             function (err, data) {
-                ngsiConverter(data, '.json')
+                ngsiConverter(data, '.json', options)
                 .then(function (data) {
                     expect(data).toEqual(jasmine.any(Array));
                     done();
                 })
                 .catch(function (data) {
+                    console.log(data);
                     done.fail("This shouldn't happen");
                 });
             }
