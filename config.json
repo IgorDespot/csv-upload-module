@@ -6,6 +6,9 @@
             ".csv": {
                 "delimiter": ";"
             }
+        },
+        "attribute-checker-options": {
+            "strictEntityCheck": true
         }
     }
 }
