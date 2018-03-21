@@ -8,7 +8,8 @@
             }
         },
         "attribute-checker-options": {
-            "strictEntityCheck": true
+            "strictEntityCheck": true,
+            "strictEntityPropertyCheck": false
         }
     }
 }
