@@ -8,7 +8,8 @@ var options = {
         }
     },
     "attribute-checker-options": {
-        "strictEntityCheck": false
+        "strictEntityCheck": false,
+        "strictEntityPropertyCheck": false
     }
 }
 
@@ -74,8 +75,32 @@ describe('ngsi-converter', function () {
                     done();
                 })
                 .catch(function (data) {
-                    console.log(data);
                     done.fail("This shouldn't happen");
+                });
+            }
+        );
+    });
+
+    it(`
+        fails on strictEntityCheck if any property has null
+        or undefined values within an entity
+    `, function (done) {
+        var strictOptions = Object.assign({}, options);
+        strictOptions["attribute-checker-options"] = {
+            "strictEntityCheck": true,
+            "strictEntityPropertyCheck": false
+        };
+        fs.readFile(
+            './test/ngsi-converter/test.json',
+            'utf-8',
+            function (err, data) {
+                ngsiConverter(data, '.json', strictOptions)
+                .then(function (data) {
+                    console.log(data);
+                    done.fail("Shouldn't happen");
+                })
+                .catch(function (data) {
+                    done();
                 });
             }
         );
