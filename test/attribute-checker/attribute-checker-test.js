@@ -85,7 +85,6 @@ describe('attribute-checker', function () {
                 attrChecker(
                     data,
                     function (err, data) {
-                        console.log(data);
                         expect(err).toBeTruthy();
                         done();
                     }, {
