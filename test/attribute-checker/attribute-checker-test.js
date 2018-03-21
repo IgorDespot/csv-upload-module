@@ -65,7 +65,34 @@ describe('attribute-checker', function () {
                     expect(err.length).toBeGreaterThan(0);
                     expect(data).toBeTruthy();
                     done();
-                }, {strictEntityCheck: true});
+                }, {
+                    strictEntityCheck: true
+                });
+            }, {
+                delimiter: ';'
+            }
+        );
+    });
+
+    it(`
+        should throw an error on csv input if
+        strictEntityPropertyCheck is enabled and
+        properties are not identical case-wise
+    `, function (done) {
+        fileParser.parse(
+            './test/attribute-checker/test-strict-err.csv',
+            function (err, data) {
+                attrChecker(
+                    data,
+                    function (err, data) {
+                        console.log(data);
+                        expect(err).toBeTruthy();
+                        done();
+                    }, {
+                        strictEntityPropertyCheck: true,
+                        strictEntityCheck: true
+                    }
+                );
             }, {
                 delimiter: ';'
             }
