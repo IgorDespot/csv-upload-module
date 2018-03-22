@@ -105,7 +105,7 @@ describe('attribute-checker', function () {
             should return true if it adds a new ruleset
             and should throw an exception if the ruleset
             with the same name already exists
-        `, function (){
+        `, function () {
             expect(addAttributeRuleSet('lol', {})).toBe(true);
             expect(
                 () => addAttributeRuleSet('lol', {})
