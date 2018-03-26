@@ -11,5 +11,6 @@
             "strictEntityCheck": true,
             "strictEntityPropertyCheck": false
         }
-    }
+    },
+    "port": "3000" 
 }
