@@ -2,6 +2,7 @@
 
 ##[Unreleased]
 
+## [0.1.0] - 2018-03-27
 ### Added
 - Orion-module
 - Orion-connection module
