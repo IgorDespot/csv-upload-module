@@ -17,7 +17,7 @@ var fs = require('fs')
  */
 
 var port = normalizePort(process.env.PORT || config['port']);
-app.set('port', config['port']);
+app.set('port', port);
 
 /**
  * Create HTTP server.
@@ -28,7 +28,7 @@ var options = {
   cert: fs.readFileSync('./certificate.crt')
 };
 
- var server = http.createServer(app).listen(pconfig['port'],'192.168.240.127');
+ var server = http.createServer(app).listen(3000, '192.168.240.127');
 // var server = https.createServer(options, app);
 
 /**
