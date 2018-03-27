@@ -3,7 +3,7 @@ Module for reading csv file from pilot site users and sending it to Orion contex
 
 # Installation
 1. Download the repository.
-2. *OPTIONAL*You may need to use npm 5.2.0 since there are issues with npm 5.3.0 on Windows 10.
+2. *OPTIONAL* You may need to use npm 5.2.0 since there are issues with npm 5.3.0 on Windows 10.
 3. Install npm modules: npm install.
 4. Install nested npm modules: npx recursive-install. (this will instll modules from package.json files from upload-module, login-module, etc..)
 5. Start up server: npm start (we used nodemon)/nodemon.
