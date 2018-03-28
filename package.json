@@ -29,6 +29,7 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
+    "cors": "^2.8.4",
     "express-generator": "^4.15.5",
     "frisby": "^2.0.13",
     "jasmine": "^3.0.0",

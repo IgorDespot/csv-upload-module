@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const expbs = require('express-handlebars');
 const fs = require('fs');
+const cors = require('cors');
 
 var app = express();
 
@@ -19,6 +20,8 @@ app.use(helmet.hsts({
     return req.secure || (req.headers['x-forwarded-proto'] === 'https')
   }
 }));
+
+app.use(cors());
 
 // Require login module
 const login = require('./lib/login-module');
