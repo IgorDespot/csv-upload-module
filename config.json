@@ -12,5 +12,9 @@
             "strictEntityPropertyCheck": false
         }
     },
-    "port": "3000" 
+    "port": "3000",
+    "status": ["ok", "lidOpen", "lidOpen", "lidOpen"],
+    "category": ["bulk", "trashCan", "wheelieBin", "bag", "fixed collection centers", "mobile collection centers", "underground", "pneumatic", "portable"],
+    "type":  ["side", "upper", "back"],
+    "madeOf": ["plastic", "wood", "metal", "other"]
 }
