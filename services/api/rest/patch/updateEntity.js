@@ -18,8 +18,8 @@ exports = module.exports = function (req, res, next) {
         } else if (req.file == undefined) {
             res.json('U try to send empty file fail')
         } else {
-            var data = req.file.buffer.toString();
-            var extension = uploadModule.getFileExtension(req.file);
+            var data = req.files[0].buffer.toString();
+            var extension = uploadModule.getFileExtension(req.files[0]);
             ngsiConverter(data, extension)
                 .then(
                     (data) => {
