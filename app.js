@@ -24,13 +24,21 @@ app.use(helmet.hsts({
 const login = require('./lib/login-module');
 login(app);
 
-// Routes
-const routes = require('./routes/login/index');
-const users = require('./routes/login/users');
-const index = require('./routes/login/index');
-const upload = require('./routes/upload/upload');
-const entityList = require('./routes/entity-list');
-const api = require('./routes/api');
+require('lib/route-configurator')(
+  app,
+  JSON.parse(`
+    {
+      "/": "./routes/login/index",
+      "/users": "./routes/login/users",
+      "/upload": "./routes/upload/upload",
+      "/entities": "./routes/entity-list",
+      "/api": "./routes/api"
+    }
+  `),
+  __dirname
+);
+
+
 
 // View Engine
 app.set('views/login', path.join(__dirname, './views/login'));//
@@ -53,11 +61,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/upload', upload);
-app.use('/entities', entityList);
-app.use('/api', api);
 
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {
