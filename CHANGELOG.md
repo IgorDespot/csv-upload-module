@@ -1,6 +1,8 @@
 #Changelog
 
 ##[Unreleased]
+### Added
+- Route configurator module
 
 ## [0.1.0] - 2018-03-27
 ### Added
