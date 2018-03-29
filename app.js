@@ -1,4 +1,5 @@
 require('app-module-path').addPath( __dirname );
+var config = require('./config.json');
 var helmet = require('helmet');
 var express = require('express');
 var path = require('path');
@@ -11,34 +12,12 @@ const fs = require('fs');
 
 var app = express();
 
-app.use(helmet.hsts({
-  maxAge: 5184000,
-  includeSubDomains: true,
-  preload: true,
-  setIf: function (req, res) {
-    return req.secure || (req.headers['x-forwarded-proto'] === 'https')
-  }
-}));
-
 // Require login module
 const login = require('./lib/login-module');
 login(app);
 
-require('lib/route-configurator')(
-  app,
-  JSON.parse(`
-    {
-      "/": "./routes/login/index",
-      "/users": "./routes/login/users",
-      "/upload": "./routes/upload/upload",
-      "/entities": "./routes/entity-list",
-      "/api": "./routes/api"
-    }
-  `),
-  __dirname
-);
-
-
+var routeConfigurator = require('lib/route-configurator');
+routeConfigurator(app, config['app-routes'], __dirname);
 
 // View Engine
 app.set('views/login', path.join(__dirname, './views/login'));//
