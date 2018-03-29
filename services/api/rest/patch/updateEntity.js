@@ -36,14 +36,22 @@ exports = module.exports = function (req, res, next) {
                     }
                 ).catch((err) => {
                     var data = err.result;
+                    var errors = err.err;
                     data.forEach(element => {
-                        entity.entityCreatePromise(service, service_path,element).then((resolve) => {
-                            console.log("Entitiy: " + element.id + "was successfuly created")
+                        entity.entityUpdatePromise(element).then((resolve) => {
+                            console.log("Entitiy: " + element.id + "was successfuly updated")
                         }).catch((err) => {
-                            console.log("Entity: " + element.id + "was not crated")
+                            console.log("Entity: " + element.id + "was not updated")
                         })
                     });
-                    res.json(err)
+                    res.json([
+                        {
+                            "Number of errors" : sizeObj(errors),
+                            "Successfuly created": sizeObj(data)
+                        },
+                        err.err,
+                        test(data)
+                    ])
                 })
                 .then((msg) => {
                     res.json(msg);
@@ -61,3 +69,15 @@ function entityFailWrapper(promise) {
             return Promise.resolve(err);
         });
 }
+
+function sizeObj(obj) {
+    return Object.keys(obj).length;
+  }
+  
+  function test(obj) {
+      var fail = [];
+      obj.forEach(element => {
+         fail.push(payload.success(element));
+      })
+      return fail;
+  }
