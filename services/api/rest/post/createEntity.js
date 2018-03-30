@@ -36,9 +36,9 @@ exports = module.exports = function (req, res, next) {
                         return Promise.all(promises);
                     }
                 ).catch((err) => {
+                    console.log(err)
                     var data = err.result;
                     var errors = err.err;
-                    console.log(errors)
                     data.forEach(element => {
                         entity.entityCreatePromise(service,service_path,element).then((resolve) => {
                             console.log("Entitiy: " + element.id + "was successfuly created")
