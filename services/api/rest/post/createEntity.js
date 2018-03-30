@@ -29,7 +29,7 @@ exports = module.exports = function (req, res, next) {
                         data.forEach((curr, index) => {
                             promises[index] = Promise.resolve(curr)
                                 .then((obj) => {
-                                    responses[index] = entityFailWrapper(entity.entityCreatePromise(service, service_path, obj));
+                                    responses[index] = entityFailWrapper(entity.entityCreatePromise(service,service_path,obj));
                                     return responses[index];
                                 });
                         });
@@ -38,16 +38,16 @@ exports = module.exports = function (req, res, next) {
                 ).catch((err) => {
                     var data = err.result;
                     var errors = err.err;
+                    console.log(errors)
                     data.forEach(element => {
-                        entity.entityCreatePromise(service, service_path,element).then((resolve) => {
+                        entity.entityCreatePromise(service,service_path,element).then((resolve) => {
                             console.log("Entitiy: " + element.id + "was successfuly created")
                         }).catch((err) => {
                             console.log("Entity: " + element.id + "was not crated")
                         })
                     });
-                    res.json([
-                        {
-                            "Number of errors" : sizeObj(errors),
+                    res.json([{
+                            "Number of errors": sizeObj(errors),
                             "Successfuly created": sizeObj(data)
                         },
                         err.err,
@@ -55,8 +55,7 @@ exports = module.exports = function (req, res, next) {
                     ])
                 })
                 .then((msg) => {
-                    res.json([
-                        {
+                    res.json([{
                             "Number of errors": numOfFails(msg),
                             "Successfuly created": numOfSuccess(msg)
                         },
@@ -64,7 +63,7 @@ exports = module.exports = function (req, res, next) {
                     ]);
                 })
                 .catch((err) =>
-                    res.json(err)
+                    res.json(console.log(err))
                 );
         }
     });
@@ -79,17 +78,17 @@ function entityFailWrapper(promise) {
 
 function sizeObj(obj) {
     return Object.keys(obj).length;
-  }
-  
-  function test(obj) {
-      var fail = [];
-      obj.forEach(element => {
-         fail.push(payload.success(element));
-      })
-      return fail;
-  }
+}
 
-  function numOfFails(msg) {
+function test(obj) {
+    var fail = [];
+    obj.forEach(element => {
+        fail.push(payload.success(element));
+    })
+    return fail;
+}
+
+function numOfFails(msg) {
     var fails = [];
     msg.forEach(igor => {
         igor.status.forEach(despot => {
@@ -108,7 +107,7 @@ function numOfSuccess(msg) {
         igor.status.forEach(despot => {
             despot.actions.forEach(element => {
                 if (element.status === 'SUCCESS')
-                success.push(element.status)
+                    success.push(element.status)
             });
         });
     })
