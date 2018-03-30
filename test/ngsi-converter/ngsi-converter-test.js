@@ -41,6 +41,29 @@ describe('ngsi-converter', function () {
         );
     });
 
+    it(`
+        Should fail for invalid csv input on strict check
+    `, function (done) {
+        var strictOptions = Object.assign({}, options);
+        strictOptions["attribute-checker-options"] = {
+            "strictEntityCheck": true,
+            "strictEntityPropertyCheck": false
+        };
+        fs.readFile(
+            './test/ngsi-converter/test-err.csv',
+            'utf-8',
+            function (err, data) {
+                ngsiConverter(data, '.csv', strictOptions)
+                .then( function (data) {
+                    done.fail("This shouldn't happen");
+                })
+                .catch(function (data) {
+                    done();
+                });
+            }
+        );
+    });
+
     xit(`
         returns an ngsi compatable JS object
         from valid xml input
@@ -99,7 +122,6 @@ describe('ngsi-converter', function () {
                     done.fail("Shouldn't happen");
                 })
                 .catch(function (data) {
-                    console.log(data);
                     done();
                 });
             }
