@@ -35,11 +35,12 @@ exports = module.exports = function (req, res, next) {
                         });
                         return Promise.all(promises);
                     }
-                ).catch((err) => {
-                    console.log(err)
-                    var data = err.result;
-                    var errors = err.err;
-                    data.forEach(element => {
+                ).catch((data) => {
+                    var result = data.result;
+                    var errorMessages = data.err.map((err) => {
+                        return err.message;
+                    });
+                    result.forEach(element => {
                         entity.entityCreatePromise(service,service_path,element).then((resolve) => {
                             console.log("Entitiy: " + element.id + "was successfuly created")
                         }).catch((err) => {
@@ -47,11 +48,11 @@ exports = module.exports = function (req, res, next) {
                         })
                     });
                     res.json([{
-                            "Number of errors": sizeObj(errors),
-                            "Successfuly created": sizeObj(data)
+                            "Number of errors": sizeObj(errorMessages),
+                            "Successfuly created": sizeObj(result)
                         },
-                        JSON.stringify(err),
-                        test(data)
+                        JSON.stringify(errorMessages),
+                        test(result)
                     ])
                 })
                 .then((msg) => {
