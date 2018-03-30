@@ -54,7 +54,13 @@ exports = module.exports = function (req, res, next) {
                     ])
                 })
                 .then((msg) => {
-                    res.json(msg);
+                    res.json([
+                        {
+                            "Number of errors": numOfFails(msg),
+                            "Successfuly created": numOfSuccess(msg)
+                        },
+                        msg
+                    ]);
                 })
                 .catch((err) =>
                     res.json(err)
@@ -81,3 +87,29 @@ function sizeObj(obj) {
       })
       return fail;
   }
+
+  function numOfFails(msg) {
+    var fails = [];
+    msg.forEach(igor => {
+        igor.status.forEach(despot => {
+            despot.actions.forEach(element => {
+                if (element.status === 'FAIL')
+                    fails.push(element.status)
+            });
+        });
+    })
+    return fails.length;
+}
+
+function numOfSuccess(msg) {
+    var success = [];
+    msg.forEach(igor => {
+        igor.status.forEach(despot => {
+            despot.actions.forEach(element => {
+                if (element.status === 'SUCCESS')
+                success.push(element.status)
+            });
+        });
+    })
+    return success.length;
+}

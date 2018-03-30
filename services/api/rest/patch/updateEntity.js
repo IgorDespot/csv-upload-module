@@ -44,17 +44,22 @@ exports = module.exports = function (req, res, next) {
                             console.log("Entity: " + element.id + "was not updated")
                         })
                     });
-                    res.json([
-                        {
-                            "Number of errors" : sizeObj(errors),
-                            "Successfuly created": sizeObj(data)
+                    res.json([{
+                            "Number of errors": sizeObj(errors),
+                            "Successfuly updated": sizeObj(data)
                         },
                         err.err,
                         test(data)
                     ])
                 })
                 .then((msg) => {
-                    res.json(msg);
+                    res.json([
+                        {
+                            "Number of errors": numOfFails(msg),
+                            "Successfuly created": numOfSuccess(msg)
+                        },
+                        msg
+                    ]);
                 })
                 .catch((err) =>
                     res.json(err)
@@ -72,12 +77,38 @@ function entityFailWrapper(promise) {
 
 function sizeObj(obj) {
     return Object.keys(obj).length;
-  }
-  
-  function test(obj) {
-      var fail = [];
-      obj.forEach(element => {
-         fail.push(payload.success(element));
-      })
-      return fail;
-  }
+}
+
+function test(obj) {
+    var fail = [];
+    obj.forEach(element => {
+        fail.push(payload.success(element));
+    })
+    return fail;
+}
+
+function numOfFails(msg) {
+    var fails = [];
+    msg.forEach(igor => {
+        igor.status.forEach(despot => {
+            despot.actions.forEach(element => {
+                if (element.status === 'FAIL')
+                    fails.push(element.status)
+            });
+        });
+    })
+    return fails.length;
+}
+
+function numOfSuccess(msg) {
+    var success = [];
+    msg.forEach(igor => {
+        igor.status.forEach(despot => {
+            despot.actions.forEach(element => {
+                if (element.status === 'SUCCESS')
+                    success.push(element.status)
+            });
+        });
+    })
+    return success.length;
+}
