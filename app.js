@@ -1,4 +1,5 @@
 require('app-module-path').addPath( __dirname );
+var config = require('./config.json');
 var helmet = require('helmet');
 var express = require('express');
 var path = require('path');
@@ -12,28 +13,14 @@ const cors = require('cors');
 
 var app = express();
 
-app.use(helmet.hsts({
-  maxAge: 5184000,
-  includeSubDomains: true,
-  preload: true,
-  setIf: function (req, res) {
-    return req.secure || (req.headers['x-forwarded-proto'] === 'https')
-  }
-}));
-
 app.use(cors());
 
 // Require login module
 const login = require('./lib/login-module');
 login(app);
 
-// Routes
-const routes = require('./routes/login/index');
-const users = require('./routes/login/users');
-const index = require('./routes/login/index');
-const upload = require('./routes/upload/upload');
-const entityList = require('./routes/entity-list');
-const api = require('./routes/api');
+var routeConfigurator = require('lib/route-configurator');
+routeConfigurator(app, config['app-routes'], __dirname);
 
 // View Engine
 app.set('views/login', path.join(__dirname, './views/login'));//
@@ -56,11 +43,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/upload', upload);
-app.use('/entities', entityList);
-app.use('/api', api);
 
 //catch 404 and forward to error handler
 app.use(function(req, res, next) {

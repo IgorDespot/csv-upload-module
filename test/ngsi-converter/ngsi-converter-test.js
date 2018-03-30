@@ -96,7 +96,6 @@ describe('ngsi-converter', function () {
             function (err, data) {
                 ngsiConverter(data, '.json', strictOptions)
                 .then(function (data) {
-                    console.log(data);
                     done.fail("Shouldn't happen");
                 })
                 .catch(function (data) {

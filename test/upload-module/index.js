@@ -9,7 +9,7 @@ var superagent = require('superagent').agent();
 
 const fileExtentions = config['file-extentions'];
 
-xdescribe('Upload module', function () {
+describe('Upload module', function () {
 
     it('should be a function', function () {
         expect(upload).toEqual(jasmine.any(Function));

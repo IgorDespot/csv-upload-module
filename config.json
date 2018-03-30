@@ -13,6 +13,13 @@
         }
     },
     "port": "3000",
+    "app-routes": {
+        "/": "./routes/login/index",
+        "/users": "./routes/login/users",
+        "/upload": "./routes/upload/upload",
+        "/entities": "./routes/entity-list",
+        "/api": "./routes/api"
+    },
     "status": ["ok", "lidOpen", "lidOpen", "lidOpen"],
     "category": ["bulk", "trashCan", "wheelieBin", "bag", "fixed collection centers", "mobile collection centers", "underground", "pneumatic", "portable"],
     "type":  ["side", "upper", "back"],
