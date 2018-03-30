@@ -48,7 +48,7 @@ exports = module.exports = function (req, res, next) {
                         })
                     });
                     res.json([{
-                            "Number of errors": sizeObj(errors),
+                            "Number of errors": sizeObj(errorMessages),
                             "Successfuly created": sizeObj(result)
                         },
                         JSON.stringify(errorMessages),
