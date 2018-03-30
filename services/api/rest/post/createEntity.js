@@ -36,6 +36,7 @@ exports = module.exports = function (req, res, next) {
                         return Promise.all(promises);
                     }
                 ).catch((err) => {
+                    console.log(err)
                     var data = err.result;
                     var errors = err.err;
                     data.forEach(element => {
