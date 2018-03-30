@@ -38,7 +38,7 @@ exports = module.exports = function (req, res, next) {
                     var data = err.result;
                     var errors = err.err;
                     data.forEach(element => {
-                        entity.entityCreatePromise(element).then((resolve) => {
+                        entity.entityCreatePromise(service, service_path, element).then((resolve) => {
                             console.log("Entitiy: " + element.id + "was successfuly created")
                         }).catch((err) => {
                             console.log("Entity: " + element.id + "was not crated")
@@ -80,9 +80,9 @@ function sizeObj(obj) {
     return Object.keys(obj).length;
   }
   
-  function test(obj) {
+  function test(data) {
       var fail = [];
-      obj.forEach(element => {
+      data.forEach(element => {
          fail.push(payload.success(element));
       })
       return fail;
