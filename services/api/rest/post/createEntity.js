@@ -50,7 +50,7 @@ exports = module.exports = function (req, res, next) {
                             "Number of errors": sizeObj(errors),
                             "Successfuly created": sizeObj(data)
                         },
-                        err.err,
+                        err,
                         test(data)
                     ])
                 })
