@@ -16,7 +16,7 @@ exports = module.exports = function (req, res, next) {
     upload(req, res, (err) => {
         if (err) {
             res.json(err)
-        } else if (req.file == undefined) {
+        } else if (req.files == undefined) {
             res.json('U try to send empty file fail')
         } else {
             var data = req.files[0].buffer.toString();
@@ -29,33 +29,34 @@ exports = module.exports = function (req, res, next) {
                         data.forEach((curr, index) => {
                             promises[index] = Promise.resolve(curr)
                                 .then((obj) => {
-                                    responses[index] = entityFailWrapper(entity.entityUpdatePromise(service, service_path, obj));
+                                    responses[index] = entityFailWrapper(entity.entityUpdatePromise(service,service_path,obj));
                                     return responses[index];
                                 });
                         });
                         return Promise.all(promises);
                     }
-                ).catch((err) => {
-                    var data = err.result;
-                    var errors = err.err;
-                    data.forEach(element => {
+                ).catch((data) => {
+                    var result = data.result;
+                    var errorMessages = data.err.map((err) => {
+                        return err.message;
+                    });
+                    result.forEach(element => {
                         entity.entityUpdatePromise(service,service_path,element).then((resolve) => {
-                            console.log("Entitiy: " + element.id + "was successfuly updated")
+                            console.log("Entitiy: " + element.id + "was successfuly created")
                         }).catch((err) => {
-                            console.log("Entity: " + element.id + "was not updated")
+                            console.log("Entity: " + element.id + "was not crated")
                         })
                     });
                     res.json([{
-                            "Number of errors": sizeObj(errors),
-                            "Successfuly updated": sizeObj(data)
+                            "Number of errors": sizeObj(errorMessages),
+                            "Successfuly created": sizeObj(result)
                         },
-                        err.err,
-                        test(data)
+                        JSON.stringify(errorMessages),
+                        test(result)
                     ])
                 })
                 .then((msg) => {
-                    res.json([
-                        {
+                    res.json([{
                             "Number of errors": numOfFails(msg),
                             "Successfuly created": numOfSuccess(msg)
                         },
@@ -63,7 +64,7 @@ exports = module.exports = function (req, res, next) {
                     ]);
                 })
                 .catch((err) =>
-                    res.json(err)
+                    res.json(console.log(err))
                 );
         }
     });
