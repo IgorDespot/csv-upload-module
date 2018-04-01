@@ -10,6 +10,15 @@ const commaNumToUnits = require
 const dateCheck = require
 ('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
 .dateCheck;
+const mandatoryCheck = require
+('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
+.mandatoryCheck;
+const fillingLevelCheck = require
+('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
+.fillingLevelCheck;
+const statusCheck = require
+('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
+.statusCheck;
 
 
 describe('Attribute function cheks', () => {
@@ -49,4 +58,35 @@ describe('Attribute function cheks', () => {
   it('should return null when wrong date format is passed', () => {
     expect(dateCheck('2018-2-12')).toBeNull();
   });
+
+  it('should return attribute when if we provede none falsy value', () => {
+    expect(mandatoryCheck('refDepositPointType')).toEqual(jasmine.any(String));
+  });
+
+  it('should return null when falsy value is provided', () => {
+    expect(mandatoryCheck('')).toBeNull();
+  });
+
+  it('should return null string if empty value is provided', () => {
+    expect(fillingLevelCheck('')).toEqual('null');
+  });
+
+  it('should return number in range of 0-1 if valid value is provided', () => {
+    expect(fillingLevelCheck('0.8')).toEqual(0.8);
+  });
+
+  it('should return empty string when no value is provided', () => {
+    expect(statusCheck('')).toEqual('');
+  });
+
+  it('should return lidOpen when ti is given as value', () => {
+    expect(statusCheck('lidOpen')).toEqual('lidOpen');
+  });
+
+  it(`
+    should return null when value provided is not in array of allowedStatus
+    values
+    `, () => {
+      expect(statusCheck('Igor')).toBeNull();
+    });
 });
