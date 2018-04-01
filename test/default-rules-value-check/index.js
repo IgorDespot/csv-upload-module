@@ -30,9 +30,13 @@ describe('Attribute function cheks', () => {
     expect(locationCheck('Test,test,..[1,2]')).toEqual(jasmine.any(Object));
   });
 
-  it('should return null when given string is not number', () => {
-    expect(locationCheck('')).toBeNull();
+  it('should return geo:point object when no value is given', () => {
+    expect(locationCheck('')).toEqual(jasmine.any(Object));
   });
+
+  it('should return null when given value is not a number', () => {
+    expect(locationCheck('Igor')).toBeNull();
+  })
 
   it('shoudl return array when given none empty string', () => {
     expect(stringToArray('1,2,3,4,')).toEqual(jasmine.any(Array));
