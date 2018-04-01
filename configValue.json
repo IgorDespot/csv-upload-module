@@ -1,3 +1,4 @@
 {
-  "status": ["ok", "lidOpen", "dropped", "moved"]
+  "status": ["ok", "lidOpen", "dropped", "moved"],
+  "madeof": ["plastic", "wood", "metal", "other"]
 }
