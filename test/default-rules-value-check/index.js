@@ -19,6 +19,9 @@ const fillingLevelCheck = require
 const statusCheck = require
 ('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
 .statusCheck;
+const madeofCheck = require
+('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
+.madeofCheck;
 
 
 describe('Attribute function cheks', () => {
@@ -88,5 +91,20 @@ describe('Attribute function cheks', () => {
     values
     `, () => {
       expect(statusCheck('Igor')).toBeNull();
+    });
+
+    it('should return empty string when no value is provided', () => {
+      expect(madeofCheck('')).toEqual('');
+    });
+
+    it('should return lidOpen when ti is given as value', () => {
+      expect(madeofCheck('metal')).toEqual('metal');
+    });
+
+    it(`
+      should return null when value provided is not in array of allowedMadeOf
+      values
+      `, () => {
+        expect(statusCheck('Igor')).toBeNull();
     });
 });
