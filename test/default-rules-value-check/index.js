@@ -8,7 +8,7 @@ const {
   statusCheck,
   madeofCheck
 } = require(
-  '../../lib/attribute-checker/attribute-rules/default-rules-value-check/index'
+  'lib/attribute-checker/attribute-rules/default-rules-value-check'
 );
 
 describe('Attribute function cheks', () => {
