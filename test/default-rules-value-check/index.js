@@ -14,7 +14,7 @@ const {
 describe('Attribute function cheks', () => {
 
   it('should return json object when given correct string value/format', () => {
-    expect(locationCheck('Test,test,..[1,2]')).toEqual(jasmine.any(Object));
+    expect(locationCheck('" ""geometry"": { ""type"": ""Point"", ""coordinates"": [ -2.884903846, 43.29140194 ] } }"')).toEqual(jasmine.any(Object));
   });
 
   it('should return geo:point object when no value is given', () => {
