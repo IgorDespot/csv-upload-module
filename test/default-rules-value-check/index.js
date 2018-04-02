@@ -1,28 +1,15 @@
-const locationCheck = require
-('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
-.locationCheck;
-const stringToArray = require
-('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
-.stringToArray;
-const commaNumToUnits = require
-('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
-.commaNumToUnits;
-const dateCheck = require
-('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
-.dateCheck;
-const mandatoryCheck = require
-('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
-.mandatoryCheck;
-const fillingLevelCheck = require
-('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
-.fillingLevelCheck;
-const statusCheck = require
-('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
-.statusCheck;
-const madeofCheck = require
-('../../lib/attribute-checker/attribute-rules/default-rules-value-check/index')
-.madeofCheck;
-
+const {
+  locationCheck,
+  stringToArray,
+  commaNumToUnits,
+  dateCheck,
+  mandatoryCheck,
+  fillingLevelCheck,
+  statusCheck,
+  madeofCheck
+} = require(
+  '../../lib/attribute-checker/attribute-rules/default-rules-value-check/index'
+);
 
 describe('Attribute function cheks', () => {
 
