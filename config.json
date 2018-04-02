@@ -19,9 +19,5 @@
         "/upload": "./routes/upload/upload",
         "/entities": "./routes/entity-list",
         "/api": "./routes/api"
-    },
-    "status": ["ok", "lidOpen", "lidOpen", "lidOpen"],
-    "category": ["bulk", "trashCan", "wheelieBin", "bag", "fixed collection centers", "mobile collection centers", "underground", "pneumatic", "portable"],
-    "type":  ["side", "upper", "back"],
-    "madeOf": ["plastic", "wood", "metal", "other"]
+    }
 }
