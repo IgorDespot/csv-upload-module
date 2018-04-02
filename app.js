@@ -32,20 +32,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 const session = require('express-session');
 const minute = 60 * 1000;
 app.use(session({
-    secret: 'secret',
-    saveUninitialized: false,
-    resave: false,
-    duration: 30 * minute,
-    activeDuration: 5 * minute,
+  secret: 'secret',
+  saveUninitialized: false,
+  resave: false,
+  duration: 30 * minute,
+  activeDuration: 5 * minute,
 }));
 
 const passport = require('passport');
-var FIWAREStrategy = require('passport-fiware-oauth').OAuth2Strategy;
+let FIWAREStrategy = require('passport-fiware-oauth').OAuth2Strategy;
+let { clientID, clientSecret, callbackURL } = config.authentication;
 passport.use(
   new FIWAREStrategy({
-    clientID: "4f6a91cd4ffa49c2bdcce72b7d16ced9",
-    clientSecret: "84711058a1324c36b5f15b1a2d14cfcb",
-    callbackURL: "http://localhost:3000",
+    clientID: clientID,
+    clientSecret: clientSecret,
+    callbackURL: callbackURL,
     passReqToCallback: true
   }, function addFiwareTokenToSession(req, accessToken, refreshToken, profile, done) {
     req.session.fiwareToken = accessToken;
@@ -56,9 +57,9 @@ app.use(passport.initialize());
 
 app.use(function authenticationConditional(req, res, next) {
   if (!req.session || !req.session.fiwareToken) {
-    passport.authenticate('fiware', {
+    (passport.authenticate('fiware', {
       session: false
-    })(req, res, next);
+    })(req, res, next));
   } else {
     next();
   }

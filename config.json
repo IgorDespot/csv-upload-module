@@ -19,5 +19,10 @@
         "/upload": "./routes/upload/upload",
         "/entities": "./routes/entity-list",
         "/api": "./routes/api"
+    },
+    "authentication": {
+        "clientID": "4f6a91cd4ffa49c2bdcce72b7d16ced9",
+        "clientSecret": "84711058a1324c36b5f15b1a2d14cfcb",
+        "callbackURL": "http://localhost:3000"
     }
 }
