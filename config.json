@@ -9,7 +9,7 @@
         },
         "attribute-checker-options": {
             "strictEntityCheck": true,
-            "strictEntityPropertyCheck": true
+            "strictEntityPropertyCheck": false
         }
     },
     "port": "3000",
