@@ -1,6 +1,9 @@
 let uploadModule = require('lib/upload-module');
 let upload = uploadModule(uploadModule.multer.memoryStorage());
 let payload = require('./payload');
+var rp = require('request-promise');
+var config = require('../../../../config.json');
+var orionPath = config['orion-path'];
 
 var ngsiConverter = require('lib/ngsi-converter');
 const {
@@ -21,51 +24,34 @@ exports = module.exports = function (req, res, next) {
         } else {
             var data = req.files[0].buffer.toString();
             var extension = uploadModule.getFileExtension(req.files[0]);
+            var empty = [];
             ngsiConverter(data, extension)
-                .then(
-                    (data) => {
-                        var promises = [];
-                        var responses = [];
-                        data.forEach((curr, index) => {
-                            promises[index] = Promise.resolve(curr)
-                                .then((obj) => {
-                                    responses[index] = entityFailWrapper(entity.entityCreatePromise(service,service_path,obj));
-                                    return responses[index];
-                                });
-                        });
-                        return Promise.all(promises);
-                    }
-                ).catch((data) => {
-                    var result = data.result;
-                    var errorMessages = data.err.map((err) => {
-                        return err.message;
-                    });
-                    result.forEach(element => {
-                        entity.entityCreatePromise(service,service_path,element).then((resolve) => {
-                            console.log("Entitiy: " + element.id + "was successfuly created")
-                        }).catch((err) => {
-                            console.log("Entity: " + element.id + "was not crated")
-                        })
-                    });
-                    res.json([{
-                            "Number of errors": sizeObj(errorMessages),
-                            "Successfuly created": sizeObj(result)
+                .then((data) => {
+                    var empty = [];
+                   for (let i = 0; i < data.length; i++) {
+                    var options = {
+                        method: 'POST',
+                        uri: orionPath + 'entities?options=keyValues',
+                        headers: {
+                            "Content-Type": 'application/json',
+                            "Fiware-Service": service,
+                            "Fiware-ServicePath": service_path
                         },
-                        JSON.stringify(errorMessages),
-                        test(result)
-                    ])
+                        body: data[i],
+                        json: true // Automatically stringifies the body to JSON
+                    };
+                    empty.push(rp(options)
+                    .then((res)=> {return Promise.resolve('Yes')})
+                    .catch((err)=>{return Promise.resolve(err)}))
+                   }
+                    Promise.all(empty).then((results) => {
+                        res.json(results)
+                    }).catch((error) => {
+                        console.log(error)
+                    });
+                }).catch((err) => {
+                    res.json(err);
                 })
-                .then((msg) => {
-                    res.json([{
-                            "Number of errors": numOfFails(msg),
-                            "Successfuly created": numOfSuccess(msg)
-                        },
-                        msg
-                    ]);
-                })
-                .catch((err) =>
-                    res.json(console.log(err))
-                );
         }
     });
 }
