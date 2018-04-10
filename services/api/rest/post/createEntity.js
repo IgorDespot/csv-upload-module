@@ -8,8 +8,6 @@ const orionPath       = config['orion-path'];
 const ngsiConverter   = require('lib/ngsi-converter');
 const { entity }      = require('lib/orion-module-new');
 
-console.log(sucessR);
-
 exports = module.exports = function (req, res, next) {
 
   let service = req.headers['fiware-service'];
@@ -85,7 +83,7 @@ exports = module.exports = function (req, res, next) {
           Promise.all(empty)
             .then((results) => {
               res.json([{
-                "Attribute checke errors:": sizeObj(errors),
+                "Attribute checker errors:": sizeObj(errors),
                 "Successfuly created:": numOfSuccess(results),
                 "Number of erros happend while creating:": numOfFails(results)
               },
