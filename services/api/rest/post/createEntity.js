@@ -49,7 +49,7 @@ exports = module.exports = function (req, res, next) {
           Promise.all(empty)
             .then((results) => {
               res.json([{
-                "Successfuly updated:": numOfSuccess(results),
+                "Successfuly created:": numOfSuccess(results),
                 "Number of errors happend while creating:": numOfFails(results)
               }, results])
             }).catch((error) => {
