@@ -1,7 +1,7 @@
 const {
   responseSuccess,
   responseFail
-} = require('lib/orion-module-new/entity/response');
+} = require('services/api/rest/payload');
 
 const entity = {
     "id": "8EB19",
@@ -14,7 +14,6 @@ describe('function checks', () => {
     expect(responseSuccess('CREATE'))
     .toEqual(jasmine.any(Object));
     expect(responseFail(entity,'UPDATE', 'GRESKA'))
-    console.log(responseSuccess(entity,'CREATE'))
   });
 
   it('should return json object when entity is passed', () => {
