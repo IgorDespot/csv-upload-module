@@ -15,9 +15,9 @@ exports = module.exports = function (req, res, next) {
 
   upload(req, res, (err) => {
     if (err) {
-      res.json(err)
+      res.status(415).json('Request content type is not supported. Please select .csv file')
     } else if (req.files == undefined) {
-      res.json('Please select file.')
+      res.status(400).json('The incoming request is invalid in this context. U must select some file')
     } else {
       var data = req.files[0].buffer.toString();
       var extension = uploadModule.getFileExtension(req.files[0]);
@@ -43,7 +43,11 @@ exports = module.exports = function (req, res, next) {
                return Promise.resolve(sucessR(data[i], 'CREATE'))
              })
              .catch((err) => {
-               return Promise.resolve(failedR(data[i], 'CREATE', err.error))
+               if (err.error['errno'] == 'ECONNREFUSED') {
+                  res.status(503).json('There are no server resources to fulfill the client request.')
+                } else {
+                  return Promise.resolve(failedR(data[i], 'CREATE', err.error))
+                }
              }))
           }
           Promise.all(empty)
@@ -77,7 +81,11 @@ exports = module.exports = function (req, res, next) {
                return Promise.resolve(sucessR(data[i], 'CREATE'))
              })
              .catch((err) => {
-               return Promise.resolve(failedR(data[i], 'CREATE', err.error))
+               if (err.error['errno'] == 'ECONNREFUSED') {
+                 res.status(503).json('There are no server resources to fulfill the client request.')
+              } else {
+                 return Promise.resolve(failedR(data[i], 'CREATE', err.error))
+              }
              }))
           }
           Promise.all(empty)

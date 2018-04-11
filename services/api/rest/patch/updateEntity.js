@@ -46,7 +46,11 @@ exports = module.exports = function (req, res, next) {
                return Promise.resolve(sucessR(data[i], 'UPDATE'))
              })
              .catch((err) => {
-               return Promise.resolve(failedR(data[i], 'UPDATE', err.error))
+               if (err.error['errno'] == 'ECONNREFUSED') {
+                 res.status(503).json('There are no server resources to fulfill the client request.')
+              } else {
+                 return Promise.resolve(failedR(data[i], 'UPDATE', err.error))
+              }
              }))
           }
           Promise.all(empty)
@@ -83,7 +87,11 @@ exports = module.exports = function (req, res, next) {
                return Promise.resolve(sucessR(data[i], 'UPDATE'))
              })
              .catch((err) => {
-               return Promise.resolve(failedR(data[i], 'UPDATE', err.error))
+               if (err.error['errno'] == 'ECONNREFUSED') {
+                 res.status(503).json('There are no server resources to fulfill the client request.')
+              } else {
+                 return Promise.resolve(failedR(data[i], 'UPDATE', err.error))
+              }
              }))
           }
           Promise.all(empty)
