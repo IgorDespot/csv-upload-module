@@ -23,7 +23,10 @@ exports = module.exports = function (req, res, next) {
       res.json(entities)
     })
     .catch((error) => {
-      res.json(error)
+      if (error.error['code'] == 'ECONNREFUSED')
+        res.status(503).json('There are no server resources to fulfill the client request.')
+      else
+        res.json(error)
     });
 
 }
