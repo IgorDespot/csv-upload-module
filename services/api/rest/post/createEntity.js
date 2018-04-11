@@ -54,7 +54,8 @@ exports = module.exports = function (req, res, next) {
             .then((results) => {
               res.json([{
                 "Successfuly created:": numOfSuccess(results),
-                "Number of errors happend while creating:": numOfFails(results)
+                "Attribute checker errors:": 0,
+                "Entity creation errors:": numOfFails(results)
               }, results])
             }).catch((error) => {
               res.json(error)
@@ -91,9 +92,9 @@ exports = module.exports = function (req, res, next) {
           Promise.all(empty)
             .then((results) => {
               res.json([{
-                "Attribute checker errors:": sizeObj(errors),
                 "Successfuly created:": numOfSuccess(results),
-                "Number of erros happend while creating:": numOfFails(results)
+                "Attribute checker errors:": sizeObj(errors),
+                "Entity creation errors:": numOfFails(results)
               },
               errors,
               results
