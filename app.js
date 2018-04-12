@@ -10,14 +10,14 @@ var express = require('express');
 const basicAuth = require('express-basic-auth')
 var app = express();
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(basicAuth({
   users: { 'zamudio': '123' },
   unauthorizedResponse:
 "The request has not been applied because it lacks valid authentication credentials for the target resource."
 }))
-
-const cors = require('cors');
-app.use(cors());
 
 app.set('views/login', path.join(__dirname, './views/login'));
 app.engine('handlebars', expbs({
