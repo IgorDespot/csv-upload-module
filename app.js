@@ -7,7 +7,14 @@ const expbs = require('express-handlebars');
 const fs = require('fs');
 
 var express = require('express');
+const basicAuth = require('express-basic-auth')
 var app = express();
+
+app.use(basicAuth({
+  users: { 'zamudio': '123' },
+  unauthorizedResponse:
+"The request has not been applied because it lacks valid authentication credentials for the target resource."
+}))
 
 const cors = require('cors');
 app.use(cors());
@@ -55,15 +62,15 @@ passport.use(
 );
 app.use(passport.initialize());
 
-app.use(function authenticationConditional(req, res, next) {
-  if (!req.session || !req.session.fiwareToken) {
-    (passport.authenticate('fiware', {
-      session: false
-    })(req, res, next));
-  } else {
-    next();
-  }
-});
+// app.use(function authenticationConditional(req, res, next) {
+//   if (!req.session || !req.session.fiwareToken) {
+//     (passport.authenticate('fiware', {
+//       session: false
+//     })(req, res, next));
+//   } else {
+//     next();
+//   }
+// });
 
 var routeConfigurator = require('lib/route-configurator');
 routeConfigurator(app, config['app-routes'], __dirname);
