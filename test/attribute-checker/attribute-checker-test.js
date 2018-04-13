@@ -63,7 +63,6 @@ describe('attribute-checker', function () {
             function (err, data) {
                 attrChecker(data, function (err, data) {
                     expect(err.length).toBeGreaterThan(0);
-                    expect(data).toBeTruthy();
                     done();
                 }, {
                     strictEntityCheck: true
