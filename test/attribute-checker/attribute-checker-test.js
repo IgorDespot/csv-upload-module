@@ -97,6 +97,81 @@ describe('attribute-checker', function () {
         );
     });
 
+    it(`
+        should work when strictAttributeImposterCheck is true
+        and there are no imposter attributes
+    `, function (done) {
+        fileParser.parse(
+            './test/attribute-checker/test-2.csv',
+            function (err, data) {
+                attrChecker(
+                    data,
+                    function (err, data) {
+                        expect(err).toBeFalsy();
+                        done();
+                    }, {
+                        strictAttributeImposterCheck: true,
+                        strictEntityPropertyCheck: true,
+                        strictEntityCheck: true
+                    }
+                );
+            }, {
+                delimiter: ';'
+            }
+        );
+    });
+
+    it(`
+        should work when strictAttributeImposterCheck is true
+        and there are no imposter attributes
+            BUT case sensitivity is not strict
+    `, function (done) {
+        fileParser.parse(
+            './test/attribute-checker/test-strict-err.csv',
+            function (err, data) {
+                attrChecker(
+                    data,
+                    function (err, data) {
+                        expect(err).toBeFalsy();
+                        done();
+                    }, {
+                        strictAttributeImposterCheck: true,
+                        strictEntityPropertyCheck: false,
+                        strictEntityCheck: true
+                    }
+                );
+            }, {
+                delimiter: ';'
+            }
+        );
+    });
+
+it(`
+    should work when strictAttributeImposterCheck is true
+    and there are no imposter attributes
+        BUT case sensitivity is not strict 
+        AND some attributes are missing in entities
+`, function (done) {
+    fileParser.parse(
+        './test/attribute-checker/test-partial.csv',
+        function (err, data) {
+            attrChecker(
+                data,
+                function (err, data) {
+                    expect(err).toBeFalsy();
+                    done();
+                }, {
+                    strictAttributeImposterCheck: true,
+                    strictEntityPropertyCheck: false,
+                    strictEntityCheck: false
+                }
+            );
+        }, {
+            delimiter: ';'
+        }
+    );
+});
+
     describe('addAttributeRuleSet', function () {
         var addAttributeRuleSet = attrChecker.addAttributeRuleSet;
 
