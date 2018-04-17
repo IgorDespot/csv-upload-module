@@ -1,0 +1,206 @@
+
+    [{
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:0"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:1"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:2"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:3"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:4"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:5"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:6"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:7"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:8"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:9"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:10"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:11"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:12"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:13"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:14"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:15"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }, {
+        "status": [{
+            "type": "DepositPointType",
+            "description": {
+                "id": "depositpointtype:16"
+            },
+            "actions": [{
+                "error": "",
+                "status": "SUCCESS",
+                "type": "CREATE"
+            }]
+        }]
+    }]

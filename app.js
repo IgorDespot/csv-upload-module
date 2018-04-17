@@ -6,6 +6,10 @@ var bodyParser = require('body-parser');
 const expbs = require('express-handlebars');
 const fs = require('fs');
 
+function myAuthorizer(username, password) {
+  return username == config['USERNAME'] && password == config['PASSWORD']
+}
+
 var express = require('express');
 const basicAuth = require('express-basic-auth')
 var app = express();
@@ -14,7 +18,7 @@ const cors = require('cors');
 app.use(cors());
 
 app.use(basicAuth({
-  users: { 'zamudio': '123' },
+  authorizer: myAuthorizer,
   unauthorizedResponse:
 "The request has not been applied because it lacks valid authentication credentials for the target resource."
 }))

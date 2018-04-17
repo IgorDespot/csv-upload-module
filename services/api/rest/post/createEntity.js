@@ -1,12 +1,13 @@
-const uploadModule    = require('lib/upload-module');
-const upload          = uploadModule(uploadModule.multer.memoryStorage());
-const sucessR         = require('../payload').responseSuccess;
-const failedR         = require('../payload').responseFail;
-const rp              = require('request-promise');
-const config          = require('../../../../config.json');
-const orionPath       = config['orion-path'];
-const ngsiConverter   = require('lib/ngsi-converter');
-const { entity }      = require('lib/orion-module-new');
+const uploadModule     = require('lib/upload-module');
+const upload           = uploadModule(uploadModule.multer.memoryStorage());
+const sucessR          = require('../payload').responseSuccess;
+const failedR          = require('../payload').responseFail;
+const rp               = require('request-promise');
+const config           = require('../../../../config.json');
+const orionPath        = config['orion-path'];
+const ngsiConverter    = require('lib/ngsi-converter');
+const {setOptionsPost} = require('../setOptions');
+const {numOfErrors,numOfSucess,numOfFails} = require('../summary');
 
 exports = module.exports = function (req, res, next) {
 
@@ -27,18 +28,7 @@ exports = module.exports = function (req, res, next) {
         .then((data) => {
           var empty = [];
           for (let i = 0; i < data.length; i++) {
-            var options = {
-              method: 'POST',
-              uri: orionPath + 'entities?options=keyValues',
-              headers: {
-                  "Content-Type": 'application/json',
-                  "Fiware-Service": service,
-                  "Fiware-ServicePath": service_path
-              },
-              body: data[i],
-              json: true
-            }
-            empty.push(rp(options)
+            empty.push(rp(setOptionsPost(service, service_path, data[i], orionPath))
              .then((res) => {
                return Promise.resolve(sucessR(data[i], 'CREATE'))
              })
@@ -53,31 +43,20 @@ exports = module.exports = function (req, res, next) {
           Promise.all(empty)
             .then((results) => {
               res.json([{
-                "Successfuly created:": numOfSuccess(results),
+                "Successfuly created:": numOfSucess(results),
                 "Attribute checker errors:": 0,
                 "Entity creation errors:": numOfFails(results)
               }, results])
             }).catch((error) => {
               res.json(error)
             })
-        }).catch((error) => {
+        }).catch((error) => { // ERROR HANDLE
           var data = error.result;
           var errors = error.err.map((err) => {
               return err.message;
           });
           for (let i = 0; i < data.length; i++) {
-            var options = {
-              method: 'POST',
-              uri: orionPath + 'entities?options=keyValues',
-              headers: {
-                  "Content-Type": 'application/json',
-                  "Fiware-Service": service,
-                  "Fiware-ServicePath": service_path
-              },
-              body: data[i],
-              json: true
-            };
-            empty.push(rp(options)
+            empty.push(rp(setOptionsPost(service, service_path, data[i], orionPath))
              .then((res) => {
                return Promise.resolve(sucessR(data[i], 'CREATE'))
              })
@@ -92,8 +71,8 @@ exports = module.exports = function (req, res, next) {
           Promise.all(empty)
             .then((results) => {
               res.json([{
-                "Successfuly created:": numOfSuccess(results),
-                "Attribute checker errors:": sizeObj(errors),
+                "Successfuly created:": numOfSucess(results),
+                "Attribute checker errors:": numOfErrors(errors),
                 "Entity creation errors:": numOfFails(results)
               },
               errors,
@@ -105,49 +84,4 @@ exports = module.exports = function (req, res, next) {
         });
     }
   });
-}
-
-function entityFailWrapper(promise) {
-    return promise
-        .catch((err) => {
-            return Promise.resolve(err);
-        });
-}
-
-function sizeObj(obj) {
-    return Object.keys(obj).length;
-}
-
-function test(obj) {
-    var fail = [];
-    obj.forEach(element => {
-        fail.push(payload.success(element));
-    })
-    return fail;
-}
-
-function numOfFails(msg) {
-    var fails = [];
-    msg.forEach(igor => {
-        igor.status.forEach(despot => {
-            despot.actions.forEach(element => {
-                if (element.status === 'FAIL')
-                    fails.push(element.status)
-            });
-        });
-    })
-    return fails.length;
-}
-
-function numOfSuccess(msg) {
-    var success = [];
-    msg.forEach(igor => {
-        igor.status.forEach(despot => {
-            despot.actions.forEach(element => {
-                if (element.status === 'SUCCESS')
-                    success.push(element.status)
-            });
-        });
-    })
-    return success.length;
 }
