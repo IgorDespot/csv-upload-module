@@ -6,7 +6,7 @@ const rp              = require('request-promise');
 const config          = require('../../../../config.json');
 const orionPath       = config['orion-path'];
 const ngsiConverter   = require('lib/ngsi-converter');
-const { entity }      = require('lib/orion-module-new');
+const {setOptionsPatch}= require('../setOptions');
 
 exports = module.exports = function (req, res, next) {
 
@@ -23,25 +23,14 @@ exports = module.exports = function (req, res, next) {
       var extension = uploadModule.getFileExtension(req.files[0]);
       var empty = [];
 
-      ngsiConverter(data,extension)
+      var conf = require('config.json')['ngsi-converter'];
+      conf["attribute-checker-options"]["strictEntityCheck"] = false;
+      conf["attribute-checker-options"]['strictAttributeImposterCheck'] = true;
+      ngsiConverter(data,extension,conf)
         .then((data) => {
           var empty = [];
           for (let i = 0; i < data.length; i++) {
-            var options = {
-              method: 'POST',
-              uri: orionPath + 'entities/' + data[i].id + '/attrs?options=keyValues',
-              headers: {
-                  "Content-Type": 'application/json',
-                  "Fiware-Service": service,
-                  "Fiware-ServicePath": service_path
-              },
-              body: Object.assign({}, data[i], {
-                      id: undefined,
-                      type: undefined
-                  }),
-              json: true
-            }
-            empty.push(rp(options)
+            empty.push(rp(setOptionsPatch(service,service_path,data[i],orionPath))
              .then((res) => {
                return Promise.resolve(sucessR(data[i], 'UPDATE'))
              })
@@ -69,21 +58,7 @@ exports = module.exports = function (req, res, next) {
               return err.message;
           });
           for (let i = 0; i < data.length; i++) {
-            var options = {
-              method: 'POST',
-              uri: orionPath + 'entities/' + data[i].id + '/attrs?options=keyValues',
-              headers: {
-                  "Content-Type": 'application/json',
-                  "Fiware-Service": service,
-                  "Fiware-ServicePath": service_path
-              },
-              body: Object.assign({}, data[i], {
-                      id: undefined,
-                      type: undefined
-                  }),
-              json: true
-            };
-            empty.push(rp(options)
+            empty.push(rp(setOptionsPatch(service,service_path,data[i],orionPath))
              .then((res) => {
                return Promise.resolve(sucessR(data[i], 'UPDATE'))
              })
