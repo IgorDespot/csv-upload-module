@@ -62,3 +62,6 @@ package-lock.json
 
 # Upload module file container
 uploads
+
+# Eslint support
+.eslintrc.json
