@@ -3,16 +3,10 @@ const {
   stringToArray,
   commaNumToUnits,
   dateCheck,
-  mandatoryCheck,
-  fillingLevelCheck,
-  statusCheck,
-  madeofCheck
-} = require(
-  'lib/attribute-checker/attribute-rules/default-rules-value-check'
-);
+  mandatoryCheck
+} = require('lib/attribute-checker/attribute-rules/default-rules-value-check');
 
 describe('Attribute function cheks', () => {
-
   it('should return json object when given correct string value/format', () => {
     expect(locationCheck('" ""geometry"": { ""type"": ""Point"", ""coordinates"": [ -2.884903846, 43.29140194 ] } }"')).toEqual(jasmine.any(Object));
   });
@@ -23,7 +17,7 @@ describe('Attribute function cheks', () => {
 
   it('should return null when given value is not a number', () => {
     expect(locationCheck('Igor')).toBeNull();
-  })
+  });
 
   it('shoudl return array when given none empty string', () => {
     expect(stringToArray('1,2,3,4,')).toEqual(jasmine.any(Array));
@@ -60,42 +54,4 @@ describe('Attribute function cheks', () => {
   it('should return null when falsy value is provided', () => {
     expect(mandatoryCheck('')).toBeNull();
   });
-
-  it('should return null string if empty value is provided', () => {
-    expect(fillingLevelCheck('')).toEqual('null');
-  });
-
-  it('should return number in range of 0-1 if valid value is provided', () => {
-    expect(fillingLevelCheck('0.8')).toEqual(0.8);
-  });
-
-  it('should return empty string when no value is provided', () => {
-    expect(statusCheck('')).toEqual('');
-  });
-
-  it('should return lidOpen when ti is given as value', () => {
-    expect(statusCheck('lidOpen')).toEqual('lidOpen');
-  });
-
-  it(`
-    should return null when value provided is not in array of allowedStatus
-    values
-    `, () => {
-      expect(statusCheck('Igor')).toBeNull();
-    });
-
-    it('should return empty string when no value is provided', () => {
-      expect(madeofCheck('')).toEqual('');
-    });
-
-    it('should return lidOpen when ti is given as value', () => {
-      expect(madeofCheck('metal')).toEqual('metal');
-    });
-
-    it(`
-      should return null when value provided is not in array of allowedMadeOf
-      values
-      `, () => {
-        expect(statusCheck('Igor')).toBeNull();
-    });
 });
