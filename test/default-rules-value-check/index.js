@@ -12,7 +12,7 @@ describe('Attribute function cheks', () => {
   });
 
   it('should return geo:point object when no value is given', () => {
-    expect(locationCheck('')).toEqual(jasmine.any(Object));
+    expect(locationCheck('')).toBeNull();
   });
 
   it('should return null when given value is not a number', () => {
