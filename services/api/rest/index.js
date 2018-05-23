@@ -1,9 +1,9 @@
-let get   = require('./get');
-let post  = require('./post');
-let patch = require('./patch')
+const get = require('./get');
+const post = require('./post');
+const patch = require('./patch');
 
 module.exports = {
   get,
   post,
-  patch,
-}
+  patch
+};
