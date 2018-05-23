@@ -40,7 +40,7 @@ describe('Attribute function cheks', () => {
   });
 
   it('should return valid date when correct format is passed', () => {
-    expect(dateCheck('2018-04-01')).toEqual(jasmine.any(String));
+    expect(dateCheck('04/01/2018')).toEqual(jasmine.any(String));
   });
 
   it('should return null when wrong date format is passed', () => {
