@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 
   const options = {
     method: 'GET',
-    uri: `${orionPath}entities/`,
+    uri: `${orionPath}entities?limit=200`,
     headers: {
       'Fiware-Service': service,
       'Fiware-ServicePath': servicePath
